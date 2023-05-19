@@ -26,7 +26,7 @@
                         <!--end::Svg Icon-->
                         <input type="text" data-kt-customer-table-filter="search"
                             class="form-control form-control-solid w-250px ps-15"
-                            placeholder="Search Role" />
+                            placeholder="{{ __('translation.Search Role') }}" />
                     </div>
                     <!--end::Search-->
                 </div>
@@ -45,7 +45,7 @@
                         <!--end::Export-->
                         <!--begin::Add customer-->
                         <a href="{{ route('admin.roles.create')}}" type="button" class="btn btn-primary"
-                            >Add Role</a>
+                            >{{ __('translation.add_roles') }}</a>
                         <!--end::Add customer-->
                     </div>
                     <!--end::Toolbar-->
@@ -57,7 +57,7 @@
                                 data-kt-customer-table-select="selected_count"></span>Selected
                         </div>
                         <button type="button" class="btn btn-danger"
-                            data-kt-customer-table-select="delete_selected">Delete Selected</button>
+                            data-kt-customer-table-select="delete_selected"> Selected</button>
                     </div>
                     <!--end::Group actions-->
                 </div>
@@ -82,9 +82,9 @@
                                         value="1" />
                                 </div>
                             </th>
-                            <th class="min-w-125px">Name</th>
-                            <th class="min-w-125px">User Conut</th>
-                            <th class="text-end min-w-70px">Actions</th>
+                            <th class="min-w-125px">{{ __('translation.name') }}</th>
+                            <th class="min-w-125px">{{ __('translation.user_count') }}</th>
+                            <th class="text-end min-w-70px">{{ __('translation.action') }}</th>
                         </tr>
                         <!--end::Table row-->
                     </thead>
@@ -111,7 +111,7 @@
                                     @method('DELETE')
                                     <button href="#" class="btn btn-sm btn-danger"
                                         data-kt-menu-trigger="click"
-                                        >Delete
+                                        >{{ __('translation.delete') }}
                                     </button>
                                 </form>
                             </td>

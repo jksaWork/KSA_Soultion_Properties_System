@@ -8,33 +8,25 @@
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
         <div class="card p-5">
+            @include('layouts.includes.session')
+
             <div class="card-body p-3">
     <div class="row">
-        <form action="{{route('users.update' , $admin->id )}}" method="post">
+        <form action="{{route( 'admin.admin.update', $admin->id )}}" method="post">
             @csrf
             @method('PUT')
         <div class="col-md-12">
             <div class="card p-4">
                 <div class="row">
-                    <x:text-input class="col-md-6" name='name' value='{{ $admin->name }}'  />
-                    <x:text-input class="col-md-6" name='email' value='{{ $admin->email }}' />
-                    <x:text-input class="col-md-6" name='password'   />
-                    <x:text-input class="col-md-6" name='phone' value='{{ $admin->phone }}'  />
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="">Roles</label>
-                            <select class="form-control" name="role_id" id="" >
-                                @foreach ($roles as $item)
-                                <option value="{{$item->id}}"> {{$item->name}}</option>
-                                @endforeach
-                            </select>
-                            @error('role_id')
-                                <span class="text-danger">
-                                    {{$message}}
-                                </span>
-                                @enderror
-                        </div>
-                    </div>
+                    <x:text-input class="col-md-6" name='name'   value='{{ $admin->name  }}'/>
+                    <x:text-input class="col-md-6" name='email'  value='{{ $admin->email  }}' />
+                    <x:text-input class="col-md-6" name='password'  value='name'  />
+                    <x:select-options name='id_type' :options="App\Models\Admin::IDTYPES" class='col-md-6' />
+                    <x:text-input class="col-md-6" name='id_number'    value='{{ $admin->id_number  }}' />
+                    <x:text-input class="col-md-6" name='phone'   value='{{ $admin->phone  }}' />
+                    <x:input-file class="col-md-6" name='id_image'  />
+                    <x:input-file class="col-md-6" name='profile_image'  />
+                    <x:select-options name='role_idd' :options="$roles" class='col-md-6' />
                     <div class="mt-3">
                         <button class="btn-primary btn">
                             Save

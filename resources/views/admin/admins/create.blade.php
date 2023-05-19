@@ -8,9 +8,11 @@
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
         <div class="card p-5">
+            @include('layouts.includes.session')
+
             <div class="card-body p-3">
     <div class="row">
-        <form action="{{route('users.store')}}" method="post">
+        <form action="{{route('admin.admin.store')}}" method="post" enctype="multipart/form-data">
             @csrf
         <div class="col-md-12">
             <div class="card p-4">
@@ -18,31 +20,21 @@
                     <x:text-input class="col-md-6" name='name'  />
                     <x:text-input class="col-md-6" name='email'  />
                     <x:text-input class="col-md-6" name='password'  />
+                    <x:select-options name='id_type' :options="App\Models\Admin::IDTYPES" class='col-md-6' />
+                    <x:text-input class="col-md-6" name='id_number'   />
                     <x:text-input class="col-md-6" name='phone'  />
-                        @if (auth()->guard('web')->check())
-                            <x:text-input name='agent_id' class='col-md-6' value="{{auth()->user()->agent_id ?? ''}}" />
-                        @endif
-                    <div class="col-md-6  {{ !auth()->guard('web')->check() ?: 'd-none'}}">
-                        <div class="form-group">
-                            <label for="">Roles</label>
-                            <select class="form-control" name="role_id" id="" >
-                                @foreach ($roles as $item)
-                                <option value="{{$item->id}}"> {{$item->name}}</option>
-                                @endforeach
-                            </select>
-                            @error('role_id')
-                                <span class="text-danger">
-                                    {{$message}}
-                                </span>
-                                @enderror
-                        </div>
-                    </div>
+                    <x:input-file class="col-md-6" name='id_image'  />
+                    <x:input-file class="col-md-6" name='profile_image'  />
+
+                    <x:select-options name='role_idd' :options="$roles" class='col-md-6' />
+
+
                     <div class="mt-3">
                         <button class="btn-primary btn">
-                            Save
+                            {{ __('translation.save') }}
                         </button>
                         <a href="javascript::back()" class="btn btn-light-danger">
-                            Back
+                            {{ __('translation.cancel') }}
                         </a>
                     </div>
                 </div>

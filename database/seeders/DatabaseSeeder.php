@@ -47,5 +47,11 @@ class DatabaseSeeder extends Seeder
                 'name' => $value,
             ]);
         }
+        $units = ['شقه', 'فيلا', 'فندق'];
+        foreach ($units  as $key => $value) {
+            \App\Models\Unit::factory(1)->create([
+                'name' => $value,
+            ]);
+        }
     }
 }

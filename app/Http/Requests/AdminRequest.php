@@ -25,27 +25,23 @@ class AdminRequest extends FormRequest
     {
         $rules = [
             'name' => 'required',
-            // 'email' => 'required|email|unique:users,email',
             'password' => 'required',
-            'type' => 'required',
-            'role_id' => 'required',
-            // ''
+            'email' => 'required',
+            'id_type' => 'required',
+            'id_number' => 'required',
+            'id_image' => 'required',
+            'profile_image' => 'required',
+            'phone' => 'required',
         ];
 
-        if(in_array($this->method() , ['PUT', 'PATCH'])){
+        if (in_array($this->method(), ['PUT', 'PATCH'])) {
             $admin = $this->route()->parameter('admin');
             // dd($admin);
             $rules['email'] = 'unique:users,email,' . $admin . ',id';
             $rules['password'] = '';
+            $rules['profile_image'] = '';
+            $rules['id_image'] = '';
         }
         return $rules;
-    }
-    protected function prepareForValidation()
-    {
-        return $this->merge(
-            [
-                'type' => 'admin',
-            ]
-        );
     }
 }

@@ -33,28 +33,29 @@
                         <tbody>
                         @foreach ($models as $key => $model)
                             <tr>
-                                <td> {{ $key }}</td>
+                                <td> {{__('translation.'.  $key )}}</td>
                                 <td>
                                     <div class="animated-checkbox mx-2" style="display:inline-block;">
                                         <label class="m-0">
                                             <input type="checkbox" value="{{$key}}" name="" id='{{$key}}'
                                             onchange="markAll({{$key}})"
                                             class="all-roles mark_all">
-                                            <span class="label-text">@lang('site.all')</span>
+                                            <span class="label-text">@lang('translation.all')</span>
                                         </label>
                                     </div>
 
                                     @php
                                         //create_roles, read_roles, update_roles, delete_roles
-                                            $permissionMaps = ['create', 'read', 'update', 'delete'];
+                                            $permissionMaps = ['c' => 'create','r' => 'read', 'u'=> 'update',  'd' =>'delete'];
                                     @endphp
-
-                                    @foreach ($permissionMaps as $permissionMap)
+{{-- @dd($model); --}}
+{{-- @dd(); --}}
+                                    @foreach (explode(',', $model ) as $permissionMap)
                                         <div class="animated-checkbox mx-2" style="display:inline-block;">
                                             <label class="m-0">
                                                 <input type="checkbox"
-                                                value="{{ $permissionMap . '_' . $key }}" name="permissions[]" class="role {{$key}}">
-                                                <span class="label-text">@lang('site.' . $permissionMap)</span>
+                                                value="{{ $permissionMaps[$permissionMap] . '_' . $key }}" name="permissions[]" class="role {{$key}}">
+                                                <span class="label-text">@lang('translation.' . $permissionMaps[$permissionMap])</span>
                                             </label>
                                         </div>
                                     @endforeach
@@ -66,7 +67,7 @@
                     </table><!-- end of table -->
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('site.create')</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>@lang('translation.create')</button>
                     </div>
 
                 </form><!-- end of form -->

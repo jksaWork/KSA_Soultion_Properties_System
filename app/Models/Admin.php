@@ -12,6 +12,17 @@ use Laratrust\Traits\LaratrustUserTrait;
 
 class Admin extends Authenticatable
 {
-    use HasFactory , LaratrustUserTrait, HasStatus , HasSearchScope;
-    protected $guarded = [];
+    use HasFactory, LaratrustUserTrait, HasStatus, HasSearchScope;
+    protected $fillable = [
+        "name",
+        "password",
+        "id_type",
+        "id_number",
+        "id_image",
+        "image",
+        "role_id",
+        'phone',
+        'email',
+    ];
+    public const IDTYPES = ['passport', 'national_identity', "lodging"];
 }

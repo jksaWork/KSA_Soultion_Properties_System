@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Request as FacadesRequest;
 // use Yajra\Datatables\Datatables;
 // use Yajra\DataTables\DataTables;
 use DataTables;
+
 class RoleController extends Controller
 {
     public function __construct()
@@ -19,15 +20,15 @@ class RoleController extends Controller
         // $this->middleware('permission:update_roles')->only(['edit', 'update']);
         // $this->middleware('permission:delete_roles')->only(['delete', 'bulk_delete']);
 
-    }// end of __construct
+    } // end of __construct
 
     public function index()
     {
         // dd(Role::all());
-        $roles = Role::whereNotIn('name', ['super_admin', 'admin', 'user'])
+        $roles = Role::whereNotIn('name', ['super_admin', 'admin'])
             ->withCount(['users'])->get();
-        return view('admin.roles.index' , compact('roles'));
-    }// end of index
+        return view('admin.roles.index', compact('roles'));
+    } // end of index
 
     public function data()
     {
@@ -42,14 +43,12 @@ class RoleController extends Controller
             ->addColumn('actions', 'admin.roles.data_table.actions')
             ->rawColumns(['record_select', 'actions'])
             ->toJson();
-
-    }// end of data
+    } // end of data
 
     public function create()
     {
         return view('admin.roles.create');
-
-    }// end of create
+    } // end of create
 
     public function store(Request $request)
     {
@@ -57,17 +56,22 @@ class RoleController extends Controller
             'name' => 'required|unique:roles,name',
             'permissions' => 'required',
         ]);
-        $role = Role::create($request->only(['name']));
-        $role->attachPermissions($request->permissions);
-        session()->flash('success', __('site.added_successfully'));
-        return redirect()->route('admin.roles.index');
-    }// end of store
+        // dd('Hello');
+        try {
+            $role = Role::create($request->only(['name']));
+            $role->attachPermissions($request->permissions);
+            session()->flash('success', __('translation.1'));
+            return redirect()->to('admin/roles');
+        } catch (\Throwable $th) {
+            dd($th);
+            return redirect()->back()->withErrors(__('translation.6'));
+        }
+    } // end of store
 
     public function edit(Role $role)
     {
         return view('admin.roles.edit', compact('role'));
-
-    }// end of edit
+    } // end of edit
 
     public function update(Request $request, Role $role)
     {
@@ -75,15 +79,14 @@ class RoleController extends Controller
         $role->syncPermissions($request->permissions);
         session()->flash('success', __('site.updated_successfully'));
         return redirect()->route('admin.roles.index');
-
-    }// end of update
+    } // end of update
 
     public function destroy(Role $role)
     {
         $this->delete($role);
         session()->flash('success', __('site.deleted_successfully'));
         return redirect()->back();
-    }// end of destroy
+    } // end of destroy
 
     public function bulkDelete()
     {
@@ -91,17 +94,15 @@ class RoleController extends Controller
 
             $role = Role::FindOrFail($recordId);
             $this->delete($role);
-
-        }//end of for each
+        } //end of for each
 
         session()->flash('success', __('site.deleted_successfully'));
         return response(__('site.deleted_successfully'));
-
-    }// end of bulkDelete
+    } // end of bulkDelete
 
     private function delete(Role $role)
     {
         $role->delete();
-    }// end of delete
+    } // end of delete
 
 }

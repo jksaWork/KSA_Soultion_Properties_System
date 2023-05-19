@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bank;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class BankController extends Controller
+class UnitController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class BankController extends Controller
      */
     public function index()
     {
-        return view('bank.index');
+        return view('units.index');
     }
 
     /**
@@ -34,42 +34,19 @@ class BankController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        try {
-            // dd('asd');
-            $data = $request->validate([
-                'name' => 'required',
-            ]);
 
-            $bank = Bank::create($data);
-            session()->flash('success',  __('translation.1'));
-            return redirect()->back();
-        } catch (\Throwable $th) {
-            return redirect()->back()->withErrors(__('translation.6'));
-        }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Bank  $bank
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Bank $bank)
+    public function UnitData()
     {
-        // dd($bank);
-        $bank->ChangeStatus();
-        // return redirect()->back();
-        if (!request()->ajax()) return redirect()->back();
-        return  response()->json(['sccuess' => true], 200);
-    }
-
-    public function BanksData()
-    {
-        $query = Bank::query();
+        $query = Unit::query();
+        // dd($query->get());
         return  DataTables::of($query)
-            ->addColumn('record_select', 'bank.data_table.record_select')
+            ->addColumn('record_select', 'units.data_table.record_select')
+            ->editColumn('created_at', function ($bank) {
+                return $bank->created_at->format('Y-m-d');
+            })
+            ->addColumn('realstate_count', function ($bank) {
+                return '<span class="btn btn-sm btn-info">(12)العقارات</span>';
+            })
             ->editColumn('created_at', function ($bank) {
                 return $bank->created_at->format('Y-m-d');
             })
@@ -78,18 +55,50 @@ class BankController extends Controller
             })
             // ->addColumn('actions', 'bank.data_table.actions')
             ->addColumn('actions', function ($bank) {
-                return view('bank.data_table.actions', compact('bank'));
+                return view('units.data_table.actions', compact('bank'));
             })
-            ->rawColumns(['record_select', 'actions', 'status', 'roles', 'service', 'type', 'area'])
+            ->rawColumns(['record_select', 'actions', 'realstate_count',  'status', 'roles', 'service', 'type', 'area'])
             ->toJson();
     }
+
+    public function store(Request $request)
+    {
+        try {
+            // dd('asd');
+            $data = $request->validate([
+                'name' => 'required',
+            ]);
+
+            $bank = Unit::create($data);
+            session()->flash('success',  __('translation.2'));
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            // dd($th);
+            return redirect()->back()->withErrors(__('translation.6'));
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Unit  $unit
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Unit $unit)
+    {
+        // dd($bank);
+        $unit->ChangeStatus();
+        if (!request()->ajax()) return redirect()->back();
+        return  response()->json(['sccuess' => true], 200);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Bank  $bank
+     * @param  \App\Models\Unit  $unit
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bank $bank)
+    public function edit(Unit $unit)
     {
         //
     }
@@ -98,19 +107,18 @@ class BankController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Bank  $bank
+     * @param  \App\Models\Unit  $unit
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bank $bank)
+    public function update(Request $request, Unit $unit)
     {
-        // return $bank;
         try {
             // dd('asd');
             $data = $request->validate([
                 'name' => 'required',
             ]);
 
-            $bank = $bank->update($data);
+            $unit = $unit->update($data);
             session()->flash('success',  __('translation.2'));
             return redirect()->back();
         } catch (\Throwable $th) {
@@ -121,10 +129,10 @@ class BankController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Bank  $bank
+     * @param  \App\Models\Unit  $unit
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bank $bank)
+    public function destroy(Unit $unit)
     {
         //
     }

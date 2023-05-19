@@ -20,6 +20,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\UnitController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -37,10 +38,13 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::get('/', [DashboardController::class, 'getIndex']);
 Route::get('/switch', fn () => 'jksa')->name('switchLan');
 Route::get('/pro', fn () => 'jksa')->name('profile');
-Route::middleware('auth')->group(function () {
+
+Route::middleware('auth:web,admin')->group(function () {
+
 
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('home', [AdminHomeController::class, 'index'])->name('home');
+        Route::resource('admin', AdminController::class);
 
         // role  -----------------
         // Route::get('role/data' , [RoleController::class , 'data'])->name('roles.data');
@@ -76,6 +80,9 @@ Route::group(
         Route::prefix('setting')->middleware('auth:admin')->group(function () {
             Route::resource('banks', BankController::class);
             Route::get('banks-data', [BankController::class, 'BanksData'])->name('banks.data');
+
+            Route::resource('units', UnitController::class);
+            Route::get('units-data', [UnitController::class, 'UnitData'])->name('units.data');
         });
         Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function () {
             Route::get('role/data', [RoleController::class, 'data'])->name('roles.data');
