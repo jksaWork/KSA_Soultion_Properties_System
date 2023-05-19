@@ -5,7 +5,7 @@
     @if (!request()->routeIs('dashboard'))
     <a
     type="button" data-bs-toggle="modal"
-                                                    data-bs-target="#edit_unit_{{ $bank->id }}"
+                                                    data-bs-target="#edit_bank_{{ $bank->id }}"
     href="#" class="btn btn-light-info btn-sm btn-icon me-1">
         <span class="svg-icon svg-icon-3">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -15,13 +15,13 @@
         </span>
     </a>
 
-    <div class="modal fade" id="edit_unit_{{ $bank->id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="edit_bank_{{ $bank->id }}" tabindex="-1" aria-hidden="true">
         <!--begin::Modal dialog-->
         <div class="modal-dialog modal-dialog-centered mw-650px">
             <!--begin::Modal content-->
             <div class="modal-content">
                 <!--begin::Form-->
-                <form class="form" action="{{ route('units.update' , $bank->id) }}" method="post"
+                <form class="form" action="{{ route('maintenance.update' , $bank->id) }}" method="post"
                 >
                 @method('PUT')
                 @csrf
@@ -78,7 +78,7 @@
     </div>
     @endif
 
-        <a href="#" onclick="SwitchStatus('{{ route('units.show' , ['unit' => $bank->id, 'status' => 1])}}')"
+        <a href="#" onclick="SwitchStatus('{{ route('maintenance.show' , ['maintenance' => $bank->id, 'status' => 1])}}')"
             class="btn btn-light-success btn-sm btn-icon me-1">
             <span class="svg-icon svg-icon-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

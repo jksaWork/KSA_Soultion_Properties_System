@@ -202,4 +202,7 @@ return [
     'search_on_units' => 'بحث في قائمه الوحدات',
     'add_unit' => 'اضافه وحده',
     'number_of_realstate' => 'عدد العقارت',
+    'maintenance_type' => 'انوع الصيانه',
+    'add_maintenance_type' => 'اضافه نوع صيانه',
+    'search_on_maintenance_type' => 'بحث في قائمه الصيانه',
 ];

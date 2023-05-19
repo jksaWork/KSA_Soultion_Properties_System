@@ -145,6 +145,14 @@
                                     <span class="menu-title">{{ __('translation.units_type') }}</span>
                                 </a>
                             </div>
+                            <div class="menu-item">
+                                <a class="menu-link" href="{{ route('maintenance.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">{{ __('translation.maintenance_type') }}</span>
+                                </a>
+                            </div>
 
                             {{-- <div class="menu-item">
                             <a class="menu-link" href="{{route('admin.roles.index') }}">

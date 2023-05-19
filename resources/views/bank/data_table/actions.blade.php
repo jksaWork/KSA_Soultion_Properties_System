@@ -32,6 +32,7 @@
                         <!--end::Modal title-->
                         <!--begin::Close-->
                         <div id="kt_modal_add_customer_close"
+                        data-bs-dismiss="modal" aria-label="Close"
                             class="btn btn-icon btn-sm btn-active-icon-primary">
                             <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                             <span class="svg-icon svg-icon-1">
@@ -62,7 +63,8 @@
                     <div class="modal-footer flex-start items-center">
                         <!--begin::Button-->
                         <button type="reset" id="kt_modal_add_customer_cancel"
-                            class="btn btn-light me-3">{{ __('translation.cancel') }}</button>
+                        data-bs-dismiss="modal" aria-label="Close"
+                        class="btn btn-light me-3">{{ __('translation.cancel') }}</button>
                         <!--end::Button-->
                         <!--begin::Button-->
                        <button class="btn btn-primary"> {{ __('translation.save') }} </button>

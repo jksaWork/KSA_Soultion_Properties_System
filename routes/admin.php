@@ -17,6 +17,7 @@ use App\Http\Controllers\AssingOrderToClientController;
 use App\Http\Controllers\AttachmentsController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\SettingController;
@@ -80,9 +81,12 @@ Route::group(
         Route::prefix('setting')->middleware('auth:admin')->group(function () {
             Route::resource('banks', BankController::class);
             Route::get('banks-data', [BankController::class, 'BanksData'])->name('banks.data');
-
+            // Insert units
             Route::resource('units', UnitController::class);
             Route::get('units-data', [UnitController::class, 'UnitData'])->name('units.data');
+            // Mantanic
+            Route::resource('maintenance', MaintenanceController::class);
+            Route::get('maintenance-data', [MaintenanceController::class, 'MaintenanceData'])->name('maintenance.data');
         });
         Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function () {
             Route::get('role/data', [RoleController::class, 'data'])->name('roles.data');

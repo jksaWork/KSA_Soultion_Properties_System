@@ -126,6 +126,7 @@
                                         <div class="modal-footer flex-start items-center">
                                             <!--begin::Button-->
                                             <button type="reset" id="kt_modal_add_customer_cancel"
+                                            data-bs-dismiss="modal" aria-label="Close"
                                                 class="btn btn-light me-3">{{ __('translation.cancel') }}</button>
                                             <!--end::Button-->
                                             <!--begin::Button-->
@@ -226,7 +227,6 @@
                         icon: 'success',
                     });
                     rolesTable.draw();
-
                 })
                 .catch(error =>{
                     Swal.fire({

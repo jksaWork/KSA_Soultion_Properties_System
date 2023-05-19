@@ -2,7 +2,7 @@
 @extends(
      'layouts.admin.admin'
 )
-@section('main-head',__('translation.real_state_units'))
+@section('main-head',__('translation.maintenance_type'))
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
@@ -23,10 +23,10 @@
                                             <input type="text" id="data_search"
                                                     data-kt-customer-table-filter="search"
                                                     class="form-control form-control-solid w-250px"
-                                                    placeholder="{{ __('translation.search_on_units') }}">
+                                                    placeholder="{{ __('translation.search_on_maintenance_type') }}">
 
                                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#kt_modal_add_customer">{{ __('translation.add_unit') }}</button>
+                                                    data-bs-target="#kt_modal_add_customer">{{ __('translation.add_maintenance_type') }}</button>
                                                 <!--end::Add customer-->
 
                                         </div>
@@ -70,7 +70,6 @@
                                                             </th>
                                                             <th class="text-center">{{ __('translation.name') }}</th>
                                                             <th class="text-center">{{ __('translation.status') }}</th>
-                                                            <th class="text-center">{{ __('translation.number_of_realstate') }}</th>
                                                             <th class="text-center">{{ __('translation.created_at') }}</th>
                                                             <th class="text-center">{{ __('translation.action') }}</th>
                                                         </tr>
@@ -88,13 +87,13 @@
                                 <!--begin::Modal content-->
                                 <div class="modal-content">
                                     <!--begin::Form-->
-                                    <form class="form" action="{{ route('units.store') }}" method="post"
+                                    <form class="form" action="{{ route('maintenance.store') }}" method="post"
                                     >
                                     @csrf
                                         <!--begin::Modal header-->
                                         <div class="modal-header" id="kt_modal_add_customer_header">
                                             <!--begin::Modal title-->
-                                            <h2 class="fw-bolder">{{ __('translation.add_unit') }}</h2>
+                                            <h2 class="fw-bolder">{{ __('translation.add_maintenance_type') }}</h2>
                                             <!--end::Modal title-->
                                             <!--begin::Close-->
                                             <div id="kt_modal_add_customer_close"
@@ -152,6 +151,7 @@
                 <script>
                 function SwitchStatus(url2){
                 // alert(id);
+                // alert(url2);
                 // url = '{{ route('banks.show'  ,1) }}';
                 // url2 = url.replace('1' , id);
                 console.log(url2);
@@ -168,6 +168,7 @@
                         icon: 'success',
                     });
                     rolesTable.draw();
+
                 })
                 .catch(error =>{
                     Swal.fire({
@@ -178,6 +179,7 @@
                     rolesTable.draw();
 
                 });
+
                 }
 
                 // alert('worgiing');
@@ -197,10 +199,6 @@
                             {
                                 data: 'status',
                                 name: 'status'
-                            },
-                            {
-                                data: 'realstate_count',
-                                name: 'realstate_count'
                             },
                             {
                                 data: 'created_at',
@@ -223,7 +221,7 @@
                                 "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
                             },
                             ajax: {
-                                url: '{{ route('units.data') }}',
+                                url: '{{ route('maintenance.data') }}',
                             },
                             columns: OfferColums,
                             order: [
