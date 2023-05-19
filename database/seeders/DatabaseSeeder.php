@@ -31,5 +31,21 @@ class DatabaseSeeder extends Seeder
                 AreaSedder::class,
             ]
         );
+
+
+        // Banks IS
+        $banks = [
+            'بنك الاهلي السعودي',
+            'بنك ساب ',
+            ' البنك السعودي لللأستثمار',
+            ' البنك السعودي الفرنسي',
+            'مصرف الانماء',
+        ];
+
+        foreach ($banks as $key => $value) {
+            \App\Models\Bank::factory(1)->create([
+                'name' => $value,
+            ]);
+        }
     }
 }

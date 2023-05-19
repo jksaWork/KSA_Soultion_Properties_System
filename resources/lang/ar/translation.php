@@ -144,5 +144,12 @@ return [
     'login' => 'تسجيل دخول',
     'create_account' => 'انشاء حساب',
     'password_confirmation' => 'تاكيد كلمه المرور',
-    'agent Dashboard' => 'لوحه تحكم الوكاله'
+    'agent Dashboard' => 'لوحه تحكم الوكاله',
+    'setting' => 'الاعدادات',
+    'settings' => 'الاعدادات',
+    'created_at' => 'التاريخ',
+    'status_change_error' => 'حدث خطاء اثناء المعالجه يرجي اعاده المحاوله',
+    'status_change_sccuess' => 'تم تحديث حاله العنصر',
+    'search_on_banks' => 'بحث في قائمه البنوك',
+    'banks' => 'البنوك',
 ];

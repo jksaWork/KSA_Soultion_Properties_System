@@ -22,7 +22,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('admin'  , fn() => view('layouts.admin.admin'));
+Route::get('admin', fn () => view('layouts.admin.admin'));
 // Route::get('admin' , '')
 Auth::routes();
 
@@ -34,18 +34,19 @@ Route::group(
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
     ],
     function () {
-Route::prefix('owners')->group(function () {
-    // Auth Route
-    Route::get('login' , [OwnerAuthController::class , 'index'])->name('get.login');
-    Route::post('login' , [OwnerAuthController::class , 'login'])->name('owner.login');
-    Route::get('register' , [OwnerAuthController::class , 'getRegister'])->name('owner.register');
-    Route::post('register' , [OwnerAuthController::class , 'register'])->name('owner_register');
-    Route::middleware('auth:owner')->name('owner.')->group(function () {
-        Route::get('dashboard' , [OwnerDashbaord::class, 'index'])->name('dashboard');
-        Route::resource('offers', OwnerOfferController::class);
-        Route::get('offers-ajax', [OwnerOfferController::class , 'getAjaxData'])->name('offer.ajax');
-        Route::get('owner-map', [OwnerMapController::class , 'Map'])->name('map');
-    });
-        // Route
-    });
-});
+        Route::prefix('owners')->group(function () {
+            // Auth Route
+            Route::get('login', [OwnerAuthController::class, 'index'])->name('get.login');
+            Route::post('login', [OwnerAuthController::class, 'login'])->name('owner.login');
+            Route::get('register', [OwnerAuthController::class, 'getRegister'])->name('owner.register');
+            Route::post('register', [OwnerAuthController::class, 'register'])->name('owner_register');
+            Route::middleware('auth:owner')->name('owner.')->group(function () {
+                Route::get('dashboard', [OwnerDashbaord::class, 'index'])->name('dashboard');
+                Route::resource('offers', OwnerOfferController::class);
+                Route::get('offers-ajax', [OwnerOfferController::class, 'getAjaxData'])->name('offer.ajax');
+                Route::get('owner-map', [OwnerMapController::class, 'Map'])->name('map');
+            });
+            // Route
+        });
+    }
+);

@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\AssingOrderToClientController;
 use App\Http\Controllers\AttachmentsController;
+use App\Http\Controllers\BankController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\OwnerController;
@@ -33,7 +34,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |
 */
 
-Route::get('/' , [DashboardController::class , 'getIndex']);
+Route::get('/', [DashboardController::class, 'getIndex']);
 Route::get('/switch', fn () => 'jksa')->name('switchLan');
 Route::get('/pro', fn () => 'jksa')->name('profile');
 Route::middleware('auth')->group(function () {
@@ -72,28 +73,31 @@ Route::group(
             Route::post('login', [AdminAuthController::class, 'login'])->name('admin.login');
         });
 
+        Route::prefix('setting')->middleware('auth:admin')->group(function () {
+            Route::resource('banks', BankController::class);
+            Route::get('banks-data', [BankController::class, 'BanksData'])->name('banks.data');
+        });
         Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function () {
             Route::get('role/data', [RoleController::class, 'data'])->name('roles.data');
             Route::resource('roles', RoleController::class);
             Route::delete('bulk_delete', fn () => '')->name('roles.bulk_delete');
         });
-        Route::middleware('auth:admin,web')->group(function(){
-             // Owners Resource
+        Route::middleware('auth:admin,web')->group(function () {
+            // Owners Resource
             Route::resource('owners', OwnerController::class);
             Route::resource('users', UserController::class);
             // User Controller
             Route::get('user-ajax', [UserController::class, 'data'])->name('users.data');
             // Offer Routes
-            Route::resource('offers' , OfferController::class);
+            Route::resource('offers', OfferController::class);
             Route::get('offer-ajax', [OfferController::class, 'data'])->name('offer.data');
-            Route::get('offer-in-map' , [\App\Http\Controllers\MapController::class,"index"])->name('Map');
-            Route::get('reports/agent-report' , [\App\Http\Controllers\ReportController::class , "agentOfferReport"])->name('report.agent');
-            Route::get('reports/offer-status-report' , [\App\Http\Controllers\ReportController::class , "offerStatusReport"])->name('report.offer_status_report');
-            Route::get('reports/system-users' , [\App\Http\Controllers\ReportController::class , "OfferAreaReport"])->name('report.system_usage_monthly');
+            Route::get('offer-in-map', [\App\Http\Controllers\MapController::class, "index"])->name('Map');
+            Route::get('reports/agent-report', [\App\Http\Controllers\ReportController::class, "agentOfferReport"])->name('report.agent');
+            Route::get('reports/offer-status-report', [\App\Http\Controllers\ReportController::class, "offerStatusReport"])->name('report.offer_status_report');
+            Route::get('reports/system-users', [\App\Http\Controllers\ReportController::class, "OfferAreaReport"])->name('report.system_usage_monthly');
 
             // sign Order To Client
             Route::get('offer-asing-to-client/{id}', [AssingOrderToClientController::class, 'index'])->name('asing_to_cleint');
-
         });
 
         Route::prefix('admin')->middleware('auth:admin')->group(function () {
@@ -110,8 +114,8 @@ Route::group(
             Route::get('agents-ajax', [AgentController::class, 'data'])->name('agents.data');
         });
 
-        Route::get('show_attachments/{attachment}' , [AttachmentsController::class , 'show'])->name('show_attachments');
-        Route::get('download_attachments/{attachment}' ,[ AttachmentsController::class , 'download'])->name('download_attachments');
-        Route::post('attachments' ,[ AttachmentsController::class , 'store'])->name('attachments.store');
+        Route::get('show_attachments/{attachment}', [AttachmentsController::class, 'show'])->name('show_attachments');
+        Route::get('download_attachments/{attachment}', [AttachmentsController::class, 'download'])->name('download_attachments');
+        Route::post('attachments', [AttachmentsController::class, 'store'])->name('attachments.store');
     }
 );
