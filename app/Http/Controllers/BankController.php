@@ -36,7 +36,18 @@ class BankController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            // dd('asd');
+            $data = $request->validate([
+                'name' => 'required',
+            ]);
+
+            $bank = Bank::create($data);
+            session()->flash('success',  __('translation.1'));
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            return redirect()->back()->withErrors(__('translation.6'));
+        }
     }
 
     /**
@@ -63,7 +74,10 @@ class BankController extends Controller
             ->editColumn('status', function ($bank) {
                 return $bank->getStatusWithSpan();
             })
-            ->addColumn('actions', 'bank.data_table.actions')
+            // ->addColumn('actions', 'bank.data_table.actions')
+            ->addColumn('actions', function ($bank) {
+                return view('bank.data_table.actions', compact('bank'));
+            })
             ->rawColumns(['record_select', 'actions', 'status', 'roles', 'service', 'type', 'area'])
             ->toJson();
     }
@@ -87,7 +101,19 @@ class BankController extends Controller
      */
     public function update(Request $request, Bank $bank)
     {
-        //
+        // return $bank;
+        try {
+            // dd('asd');
+            $data = $request->validate([
+                'name' => 'required',
+            ]);
+
+            $bank = $bank->update($data);
+            session()->flash('success',  __('translation.2'));
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            return redirect()->back()->withErrors(__('translation.6'));
+        }
     }
 
     /**

@@ -16,30 +16,19 @@
                                     <div class="row mb-2">
                                     </div><!-- end of row -->
                                     @include('layouts.includes.session')
-                                    <div class="card-header border-0 ">
+                                    <div class="mx-2  border-0 ">
                                         <!--begin::Card title-->
-                                        <div class="card-title">
-                                            <!--begin::Search-->
-                                            <div class="d-flex align-items-center position-relative ">
-                                                <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
-                                                <span class="svg-icon svg-icon-1 position-absolute ">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546"
-                                                            height="2" rx="1"
-                                                            transform="rotate(45 17.0365 15.1223)" fill="black"></rect>
-                                                        <path
-                                                            d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
-                                                            fill="black"></path>
-                                                    </svg>
-                                                </span>
-                                                <!--end::Svg Icon-->
-                                                <input type="text" id="data-table-search"
+
+                                        <div class="d-flex justify-content-between">
+                                            <input type="text" id="data_search"
                                                     data-kt-customer-table-filter="search"
-                                                    class="form-control form-control-solid w-250px ps-15"
+                                                    class="form-control form-control-solid w-250px"
                                                     placeholder="{{ __('translation.search_on_banks') }}">
-                                            </div>
-                                            <!--end::Search-->
+
+                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#kt_modal_add_customer">{{ __('translation.add_bank') }}</button>
+                                                <!--end::Add customer-->
+
                                         </div>
                                         <!--begin::Card title-->
                                         <!--begin::Card toolbar-->
@@ -91,6 +80,124 @@
                                     </div><!-- end of row -->
                                 </div><!-- end of tile -->
                             </div><!-- end of col -->
+                        </div>
+                        <div class="modal fade" id="kt_modal_add_customer" tabindex="-1" aria-hidden="true">
+                            <!--begin::Modal dialog-->
+                            <div class="modal-dialog modal-dialog-centered mw-650px">
+                                <!--begin::Modal content-->
+                                <div class="modal-content">
+                                    <!--begin::Form-->
+                                    <form class="form" action="{{ route('banks.store') }}" method="post"
+                                    >
+                                    @csrf
+                                        <!--begin::Modal header-->
+                                        <div class="modal-header" id="kt_modal_add_customer_header">
+                                            <!--begin::Modal title-->
+                                            <h2 class="fw-bolder">{{ __('translation.add_bank') }}</h2>
+                                            <!--end::Modal title-->
+                                            <!--begin::Close-->
+                                            <div id="kt_modal_add_customer_close"
+                                                class="btn btn-icon btn-sm btn-active-icon-primary">
+                                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                                <span class="svg-icon svg-icon-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
+                                                            rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                                        <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                                            transform="rotate(45 7.41422 6)" fill="black" />
+                                                    </svg>
+                                                </span>
+                                                <!--end::Svg Icon-->
+                                            </div>
+                                            <!--end::Close-->
+                                        </div>
+                                        <!--end::Modal header-->
+                                        <!--begin::Modal body-->
+                                        <div class="modal-body py-10 px-lg-17">
+                                            <!--begin::Scroll-->
+                                            <div class="scroll-y me-n7 pe-7" id="#">
+                                                <x:text-input class="col-md-12" name='name'  />
+                                            </div>
+                                            <!--end::Scroll-->
+                                        </div>
+                                        <!--end::Modal body-->
+                                        <!--begin::Modal footer-->
+                                        <div class="modal-footer flex-start items-center">
+                                            <!--begin::Button-->
+                                            <button type="reset" id="kt_modal_add_customer_cancel"
+                                                class="btn btn-light me-3">{{ __('translation.cancel') }}</button>
+                                            <!--end::Button-->
+                                            <!--begin::Button-->
+                                           <button class="btn btn-primary"> {{ __('translation.save') }} </button>
+                                            <!--end::Button-->
+                                        </div>
+                                        <!--end::Modal footer-->
+                                    </form>
+                                    <!--end::Form-->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade" id="edit_bank" tabindex="-1" aria-hidden="true">
+                            <!--begin::Modal dialog-->
+                            <div class="modal-dialog modal-dialog-centered mw-650px">
+                                <!--begin::Modal content-->
+                                <div class="modal-content">
+                                    <!--begin::Form-->
+                                    <form class="form" action="{{ route('banks.update' , 1) }}" method="post"
+                                    >
+                                    @csrf
+                                        <!--begin::Modal header-->
+                                        <div class="modal-header" id="kt_modal_add_customer_header">
+                                            <!--begin::Modal title-->
+                                            <h2 class="fw-bolder">{{ __('translation.add_bank') }}</h2>
+                                            <!--end::Modal title-->
+                                            <!--begin::Close-->
+                                            <div id="kt_modal_add_customer_close"
+                                                class="btn btn-icon btn-sm btn-active-icon-primary">
+                                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                                <span class="svg-icon svg-icon-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2"
+                                                            rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                                        <rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                                            transform="rotate(45 7.41422 6)" fill="black" />
+                                                    </svg>
+                                                </span>
+                                                <!--end::Svg Icon-->
+                                            </div>
+                                            <!--end::Close-->
+                                        </div>
+                                        <!--end::Modal header-->
+                                        <!--begin::Modal body-->
+                                        <div class="modal-body py-10 px-lg-17">
+                                            <!--begin::Scroll-->
+                                            <div class="scroll-y me-n7 pe-7" id="#updatemodel">
+                                                <x:text-input class="col-md-12" name='name'  />
+                                            </div>
+                                            <div class="scroll-y me-n7 pe-7" id="#updatemodel">
+                                                <x:text-input class="col-md-12" name='id' type='hideen'  />
+                                            </div>
+                                            <!--end::Scroll-->
+                                        </div>
+                                        <!--end::Modal body-->
+                                        <!--begin::Modal footer-->
+                                        <div class="modal-footer flex-start items-center">
+                                            <!--begin::Button-->
+                                            <button type="reset" id="kt_modal_add_customer_cancel"
+                                                class="btn btn-light me-3">{{ __('translation.cancel') }}</button>
+                                            <!--end::Button-->
+                                            <!--begin::Button-->
+                                           <button class="btn btn-primary"> {{ __('translation.save') }} </button>
+                                            <!--end::Button-->
+                                        </div>
+                                        <!--end::Modal footer-->
+                                    </form>
+                                    <!--end::Form-->
+                                </div>
+                            </div>
                         </div>
                     </div><!-- end of row -->
 
@@ -182,7 +289,7 @@
                             }
                         });
 
-                        $('#data-table-search').keyup(function() {
+                        $('#data_search').keyup(function() {
                             rolesTable.search(this.value).draw();
                         });
                         // $('#roles').on('change' , function(){

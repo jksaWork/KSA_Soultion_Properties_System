@@ -5,7 +5,7 @@
                     {{session()->get('success')}}
                 </h1>
         </div>
-        <script>
+        {{-- <script>
             toastr.options = {
                 "closeButton": true,
                 "debug": true,
@@ -23,17 +23,17 @@
                 "hideMethod": "fadeOut"
             };
             toastr.success("Are you the six fingered man?");
-        </script>
+        </script> --}}
         {{ session()->forget('success') }}
-
-    @elseif (session()->has('error'))
+        @endif
+    @if (session()->has('error'))
         <div class="alert alert-danger">
             {{-- <div class="h1"> --}}
                 <h1 class="mb-1 text-dark">{{ session()->get('error')}}</h1>
             {{-- </div> --}}
         </div>
         {{ session()->forget('error') }}
-        <script>
+        {{-- <script>
             toastr.options = {
                 "closeButton": true,
                 "debug": true,
@@ -51,6 +51,14 @@
                 "hideMethod": "fadeOut"
             };
             toastr.error("New order has been placed!");
-        </script>
+        </script> --}}
     @endif
+
+    @if($errors->any())
+        @foreach ($errors->all() as $error )
+        <div class="alert alert-danger">
+            {{$error}}
+        </div>
+        @endforeach
+@endif
 </div>
