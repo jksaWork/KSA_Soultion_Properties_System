@@ -205,4 +205,13 @@ return [
     'maintenance_type' => 'انوع الصيانه',
     'add_maintenance_type' => 'اضافه نوع صيانه',
     'search_on_maintenance_type' => 'بحث في قائمه الصيانه',
+    'add_area' => 'اضافه منطقه',
+    // 'add_area'
+    'search_on_areas' => 'بحث في قائمه المناطق',
+    'subarea' => 'الاحياء',
+    'search_on_province' => 'بحث في المحافظات',
+    'province' => 'المحافظات',
+    'add_province' => 'اضافه محافظه',
+    'chose_area' => 'اختار المنطقه',
+    'area' => 'المنطقه'
 ];

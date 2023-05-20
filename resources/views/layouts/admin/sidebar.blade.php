@@ -130,6 +130,38 @@
                                 </a>
                             </div>
                             <div class="menu-item">
+                                <a class="menu-link" href="{{ route('area.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">{{ __('translation.areas') }}</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link" href="{{ route('province.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">{{ __('translation.province') }}</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link" href="{{ route('subarea.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">{{ __('translation.subarea') }}</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link" href="{{ route('admin.admin.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">{{ __('translation.users') }}</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
                                 <a class="menu-link" href="{{ route('banks.index') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>

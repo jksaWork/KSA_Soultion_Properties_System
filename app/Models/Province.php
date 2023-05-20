@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
-use App\Traits\HasStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Area extends Model
+class Province extends Model
 {
-    use HasFactory, HasStatus;
-    protected $guarded = [];
+    use HasFactory;
+    public $fillable = ['name', 'area_id', 'status'];
 }

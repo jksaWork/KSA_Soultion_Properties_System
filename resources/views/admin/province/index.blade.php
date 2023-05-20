@@ -2,7 +2,7 @@
 @extends(
      'layouts.admin.admin'
 )
-@section('main-head',__('translation.areas'))
+@section('main-head',__('translation.province'))
 @section('content')
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
@@ -23,10 +23,10 @@
                                             <input type="text" id="data_search"
                                                     data-kt-customer-table-filter="search"
                                                     class="form-control form-control-solid w-250px"
-                                                    placeholder="{{ __('translation.search_on_areas') }}">
+                                                    placeholder="{{ __('translation.search_on_province') }}">
 
                                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#kt_modal_add_customer">{{ __('translation.add_area') }}</button>
+                                                    data-bs-target="#kt_modal_add_customer">{{ __('translation.add_province') }}</button>
                                                 <!--end::Add customer-->
 
                                         </div>
@@ -88,13 +88,13 @@
                                 <!--begin::Modal content-->
                                 <div class="modal-content">
                                     <!--begin::Form-->
-                                    <form class="form" action="{{ route('area.store') }}" method="post"
+                                    <form class="form" action="{{ route('province.store') }}" method="post"
                                     >
                                     @csrf
                                         <!--begin::Modal header-->
                                         <div class="modal-header" id="kt_modal_add_customer_header">
                                             <!--begin::Modal title-->
-                                            <h2 class="fw-bolder">{{ __('translation.add_area') }}</h2>
+                                            <h2 class="fw-bolder">{{ __('translation.add_province') }}</h2>
                                             <!--end::Modal title-->
                                             <!--begin::Close-->
                                             <div id="kt_modal_add_customer_close"
@@ -118,9 +118,23 @@
                                         <!--begin::Modal body-->
                                         <div class="modal-body py-10 px-lg-17">
                                             <!--begin::Scroll-->
+
+                                            <div class="form-group mb-2 ">
+                                                <label for=""
+                                                    >{{ __('translation.area') }}</label>
+                                                <select id='area_select' style='width:100%' name='area_id'
+
+                                                >
+                                                <option value='0'> {{ __('translation.chose_area') }}
+                                                    </option>
+
+                                                </select>
+                                            </div>
                                             <div class="scroll-y me-n7 pe-7" id="#">
                                                 <x:text-input class="col-md-12" name='name'  />
                                             </div>
+
+
                                             <!--end::Scroll-->
                                         </div>
                                         <!--end::Modal body-->
@@ -148,8 +162,11 @@
 
                 @push('scripts')
 
+                {{-- <script src="{{ asset('datatable/select2.min.js') }}"></script>
+                 --}}
 
-                <script>
+              <script>
+
                 function SwitchStatus(url2){
                 // alert(id);
                 // url = '{{ route('banks.show'  ,1) }}';
@@ -223,7 +240,7 @@
                                 "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
                             },
                             ajax: {
-                                url: '{{ route('area.data') }}',
+                                url: '{{ route('province.data') }}',
                             },
                             columns: OfferColums,
                             order: [
@@ -245,4 +262,35 @@
                         //     rolesTable.ajax.reload();
                         // });
                     </script>
-                @endpush
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+      $("#area_select").select2({
+        dropdownParent: $('#kt_modal_add_customer'),
+                ajax: {
+                    url: "{{ route('area.ajax') }}",
+                    type: "get",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        let term =  {
+                            search: params.term,
+                        };
+                        console.log(term, params);
+                        return term;
+                    },
+                    processResults: function(response) {
+                       console.log(response);
+                        return {
+                            results: response
+                        };
+                    },
+                    cache: true
+                }
+
+            });
+
+</script>
+@endpush

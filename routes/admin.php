@@ -20,7 +20,9 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\OwnerController;
+use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\SubAreaController;
 use App\Http\Controllers\UnitController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -115,6 +117,15 @@ Route::group(
             Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
             // Area Routes
             Route::resource('area', AdminAreaController::class);
+            Route::get('area-data', [AdminAreaController::class, 'AreaData'])->name('area.data');
+            Route::get('area-data-ajax', [AdminAreaController::class, 'Ajax'])->name('area.ajax');
+            Route::resource('subarea', SubAreaController::class);
+            Route::get('subarea-data', [SubAreaController::class, 'SubAreaData'])->name('subarea.data');
+
+            Route::resource('province', ProvinceController::class);
+            Route::get('province-data', [ProvinceController::class, 'provinceData'])->name('province.data');
+
+
             // Service Resource
             Route::resource('services', ServiceController::class);
             // Clients Resource
