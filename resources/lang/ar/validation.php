@@ -155,7 +155,9 @@ return [
         'id_number' => __('translation.id_number'),
         'id_image' => __('translation.id_image'),
         'profile_image' => __('translation.profile_image'),
-
+        'province_id' => 'المحافظه',
+        'subarea' => 'المنطقه الفرعيه',
+        'area' => 'المنطقه',
     ],
 
 ];

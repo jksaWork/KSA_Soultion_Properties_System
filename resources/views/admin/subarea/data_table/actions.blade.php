@@ -3,7 +3,7 @@
 
     {{-- @dd(request()->routeIs('dashboard')) --}}
     @if (!request()->routeIs('dashboard'))
-    <a onclick="ShowEditModel({{ $province->id}} , '{{ $province->name }}' , {{ $province->area_id }})"
+    <a onclick="ShowEditModel({{ $subarea->id}} , '{{ $subarea->name }}' , {{ $subarea->area_id }} , {{ $subarea->province_id }})"
     href="#" class="btn btn-light-info btn-sm btn-icon me-1">
         <span class="svg-icon svg-icon-3">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -14,7 +14,7 @@
     </a>
     @endif
 
-        <a href="#" onclick="SwitchStatus('{{ route('province.show' , ['province' => $province->id, 'status' => 1])}}')"
+        <a href="#" onclick="SwitchStatus('{{ route('subarea.show' , ['subarea' => $subarea->id, 'status' => 1])}}')"
             class="btn btn-light-success btn-sm btn-icon me-1">
             <span class="svg-icon svg-icon-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

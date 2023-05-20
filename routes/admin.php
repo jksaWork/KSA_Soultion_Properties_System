@@ -124,6 +124,7 @@ Route::group(
 
             Route::resource('province', ProvinceController::class);
             Route::get('province-data', [ProvinceController::class, 'provinceData'])->name('province.data');
+            Route::get('province-data-ajax', [ProvinceController::class, 'Ajax'])->name('province.ajax');
 
 
             // Service Resource

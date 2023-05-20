@@ -23,7 +23,7 @@ class ProvinceController extends Controller
     {
         $query = Province::query();
         return  DataTablesDataTables::of($query)
-            ->addColumn('record_select', 'admin.area.data_table.record_select')
+            ->addColumn('record_select', 'admin.province.data_table.record_select')
             ->editColumn('created_at', function ($area) {
                 return $area->created_at->format('Y-m-d');
             })
@@ -37,11 +37,34 @@ class ProvinceController extends Controller
                 return $area->getStatusWithSpan();
             })
             // ->addColumn('actions', 'bank.data_table.actions')
-            ->addColumn('actions', function ($area) {
-                return view('admin.area.data_table.actions', compact('area'));
+            ->addColumn('actions', function ($province) {
+                return view('admin.province.data_table.actions', compact('province'));
             })
             ->rawColumns(['record_select', 'actions', 'realstate_count',  'status', 'roles', 'service', 'type', 'area'])
             ->toJson();
+    }
+
+    public function Ajax()
+    {
+
+        $search = request()->search;
+        $area_id = request()->area_id;
+
+        $employees = Province::when($search, function ($q) use ($search) {
+            $q->where('name', 'like', '%' . $search . '%');
+        })->when($area_id, function ($q) use ($area_id) {
+            $q->where('area_id',   $area_id);
+        })
+            ->limit(5)->get();
+        //  Return Reponose
+        $response = array();
+        foreach ($employees as $employee) {
+            $response[] = array(
+                "id" => $employee->id,
+                "text" => $employee->name
+            );
+        }
+        return response()->json($response);
     }
 
 
@@ -85,7 +108,10 @@ class ProvinceController extends Controller
      */
     public function show(Province $province)
     {
-        //
+        $province->ChangeStatus();
+        // return redirect()->back();
+        if (!request()->ajax()) return redirect()->back();
+        return  response()->json(['sccuess' => true], 200);
     }
 
     /**
@@ -111,9 +137,10 @@ class ProvinceController extends Controller
             $data =  $request->validate([
                 'area_id' => 'required',
                 'name' => 'required',
+                'province_id' => 'required',
             ]);
 
-            $Province  = $province->update($data);
+            $Province  = Province::find($request->province_id)->update($data);
             session()->flash('success',  __('translation.2'));
             return redirect()->back();
         } catch (\Throwable $th) {

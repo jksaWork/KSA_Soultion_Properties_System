@@ -213,5 +213,11 @@ return [
     'province' => 'المحافظات',
     'add_province' => 'اضافه محافظه',
     'chose_area' => 'اختار المنطقه',
-    'area' => 'المنطقه'
+    'area' => 'المنطقه',
+    'edit_province' => 'تعديل المحافظه',
+    'add_subarea' => 'اضافه الاحياء',
+    'search_on_subarea' => 'يحث في قائمه الاحياء الفرعيه',
+    'province' => 'المحافظه',
+    'chose_province' => 'اختار المحافظه',
+    'edit_subarea' => 'تعديل بيانات الاحياء',
 ];
