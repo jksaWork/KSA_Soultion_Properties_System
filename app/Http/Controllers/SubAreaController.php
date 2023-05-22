@@ -3,11 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Models\SubArea;
+use App\Traits\HasSelect2Ajax;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class SubAreaController extends Controller
+abstract class OfferASubAreaControllerAbstract extends Controller
 {
+    // use HasFactory, HasStatus, SoftDeletes;
+    use HasSelect2Ajax;
+    protected $guarded = [];
+}
+
+class SubAreaController extends OfferASubAreaControllerAbstract
+{
+    public $Model = SubArea::class;
+    public $searchFilable =
+    [
+        'area_id' => [
+            'filed' => 'area_id',
+            'oprator' => '=',
+        ],
+        'province_id' => [
+            'filed' => 'province_id',
+            'oprator' => '=',
+        ],
+
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -27,6 +49,13 @@ class SubAreaController extends Controller
             ->editColumn('created_at', function ($area) {
                 return $area->created_at->format('Y-m-d');
             })
+            ->addColumn('area', function ($subarea) {
+                return $subarea->Area->name;
+            })
+            ->addColumn('province', function ($subarea) {
+                return $subarea->Province->name;
+            })
+
             ->addColumn('realstate_count', function ($area) {
                 return '<span class="btn btn-sm btn-info">(12)العقارات</span>';
             })

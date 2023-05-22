@@ -10,4 +10,12 @@ class SubArea extends Model
 {
     use HasFactory, HasStatus;
     public $fillable = ['name', 'area_id', 'province_id'];
+    public function Area()
+    {
+        return $this->belongsTo(Area::class);
+    }
+    public function Province()
+    {
+        return $this->belongsTo(Province::class);
+    }
 }

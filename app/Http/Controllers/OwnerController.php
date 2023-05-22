@@ -5,10 +5,23 @@ namespace App\Http\Controllers;
 use App\Http\Requests\OwnersRequest;
 use App\Models\Owner;
 use App\Repo\Interfaces\OwnerInterFace;
+use App\Traits\HasSelect2Ajax;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
-class OwnerController extends Controller
+abstract class OwnerControllerAbstract extends Controller
 {
+    // use HasFactory, HasStatus, SoftDeletes;
+    use HasSelect2Ajax;
+    protected $guarded = [];
+}
+
+
+
+
+class OwnerController extends OwnerControllerAbstract
+{
+    public $Model = Owner::class;
     public $interface;
     public function __construct(OwnerInterFace  $interface)
     {
@@ -25,6 +38,33 @@ class OwnerController extends Controller
         return $this->interface->getOwnerIndex();
     }
 
+
+    public function OwnerData()
+    {
+
+        $query = Owner::withCount('Realstates');
+
+        return  DataTables::of($query)
+            ->addColumn('record_select', 'admin.owners.data_table.record_select')
+            ->editColumn('created_at', function ($area) {
+                return $area->created_at->format('Y-m-d');
+            })
+            ->addColumn('properties', function ($owner) {
+                return '<span class="btn btn-sm btn-info">(12)العقارات</span>';
+            })
+            ->editColumn('created_at', function ($area) {
+                return $area->created_at->format('Y-m-d');
+            })
+            ->editColumn('status', function ($area) {
+                return $area->getStatusWithSpan();
+            })
+            // ->addColumn('actions', 'bank.data_table.actions')
+            ->addColumn('actions', function ($owner) {
+                return view('admin.owners.data_table.actions', compact('owner'));
+            })
+            ->rawColumns(['record_select', 'actions', 'properties', 'realstate_count',  'status', 'roles', 'service', 'type', 'area'])
+            ->toJson();
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -54,8 +94,10 @@ class OwnerController extends Controller
      */
     public function show(Owner $owner)
     {
-        if(request()->has('status')) return $this->interface->ChangeStatus($owner);
+        if (request()->has('status')) return $this->interface->ChangeStatus($owner);
+        return  view('admin.owners.show', compact('owner'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -77,7 +119,9 @@ class OwnerController extends Controller
      */
     public function update(Request $request, Owner $owner)
     {
-        return $this->interface->UpdateOwner($request , $owner);
+        // dd($request->validate());
+        // return $request->note;
+        return $this->interface->UpdateOwner($request, $owner);
     }
 
     /**

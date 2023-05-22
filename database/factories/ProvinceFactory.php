@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Area;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProvinceFactory extends Factory
@@ -14,7 +15,8 @@ class ProvinceFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->name,
+            'area_id' => Area::get()->random()->id,
         ];
     }
 }

@@ -17,11 +17,17 @@ class CreateOwnersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('phone')->nullable();
+            $table->string('id_number')->nullable();
+            $table->string('iban_number')->nullable();
+            // $table->string('bank_id')->nullable();
             $table->string('email')->nullable()->unique();
-            $table->string('password')->nullable();
+            // $table->string('password')->nullable();
+            $table->string('address')->nullable();
             $table->boolean('status')->default(1);
-            $table->string('latitude')->nullable();
-            $table->string('longtuide')->nullable();
+            $table->foreignId('province_id')->references('id')->on('provinces');
+            $table->foreignId('bank_id')->references('id')->on('banks');
+            $table->foreignId('subarea_id')->references('id')->on('sub_areas');
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

@@ -141,7 +141,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div><!-- end of row -->
 
                 @endsection

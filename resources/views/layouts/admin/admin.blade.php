@@ -58,6 +58,10 @@ License: For each use you must have a valid license purchased only from above li
         .select2-container--open .select2-dropdown {
             transform: translate(100%, 0);
         }
+        .error{
+            font-weight: bold;
+            color:red;
+        }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -157,12 +161,12 @@ License: For each use you must have a valid license purchased only from above li
     <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
     <!--end::Page Vendors Javascript-->
     <!--begin::Page Custom Javascript(used by this page)-->
-    <script src="{{ asset('assets/js/custom/apps/customers/list/list.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/modals/upgrade-plan.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/modals/create-app.js') }}"></script>
-    <script src="{{ asset('assets/js/custom/modals/users-search.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/custom/apps/customers/list/list.js') }}"></script> --}}
+    {{-- <script src="{{ asset('assets/js/custom/modals/upgrade-plan.js') }}"></script> --}}
+    {{-- <script src="{{ asset('assets/js/custom/modals/create-app.js') }}"></script> --}}
+    {{-- <script src="{{ asset('assets/js/custom/modals/users-search.js') }}"></script> --}}
 
-    <script src="{{ asset('assets/plugins/custom/formrepeater/formrepeater.bundle.js') }}"></script>
+    {{-- <script src="{{ asset('assets/plugins/custom/formrepeater/formrepeater.bundle.js') }}"></script> --}}
     {{-- <script src="{{ asset('datatable/select2.min.js') }}"></script> --}}
     {{-- <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
@@ -193,6 +197,12 @@ License: For each use you must have a valid license purchased only from above li
         }
     </script>
     @stack('scripts')
+    <script src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://jeremyfagis.github.io/dropify/dist/css/dropify.min.css">
+    <script>
+$('.dropify').dropify();
+
+    </script>
 </body>
 <!--end::Body-->
 </html>

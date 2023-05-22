@@ -21,9 +21,12 @@ use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\ProvinceController;
+use App\Http\Controllers\RealstateController;
+use App\Http\Controllers\RealstateUnitController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SubAreaController;
 use App\Http\Controllers\UnitController;
+use App\Models\RealstateUnit;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -83,9 +86,11 @@ Route::group(
         Route::prefix('setting')->middleware('auth:admin')->group(function () {
             Route::resource('banks', BankController::class);
             Route::get('banks-data', [BankController::class, 'BanksData'])->name('banks.data');
+            Route::get('banks-data-ajax', [BankController::class, 'Ajax'])->name('banks.ajax');
             // Insert units
             Route::resource('units', UnitController::class);
             Route::get('units-data', [UnitController::class, 'UnitData'])->name('units.data');
+            Route::get('units-data-ajax', [UnitController::class, 'Ajax'])->name('units.ajax');
             // Mantanic
             Route::resource('maintenance', MaintenanceController::class);
             Route::get('maintenance-data', [MaintenanceController::class, 'MaintenanceData'])->name('maintenance.data');
@@ -98,8 +103,22 @@ Route::group(
         Route::middleware('auth:admin,web')->group(function () {
             // Owners Resource
             Route::resource('owners', OwnerController::class);
+            Route::get('owner-data', [OwnerController::class, 'OwnerData'])->name('owners.data');
+            Route::get('owner-data-ajax', [OwnerController::class, 'Ajax'])->name('owners.ajax');
+
+
+            Route::resource('realstate', RealstateController::class);
+            Route::get('realstate-data', [RealstateController::class, 'RealstateData'])->name('realstate.data');
+            // Route::resource('realstate', UserController::class);
+
+            Route::prefix('realstate')->name('realstate.')->group(function () {
+                Route::resource('unit', RealstateUnitController::class);
+            });
+
             Route::resource('users', UserController::class);
+
             // User Controller
+
             Route::get('user-ajax', [UserController::class, 'data'])->name('users.data');
             // Offer Routes
             Route::resource('offers', OfferController::class);
@@ -121,6 +140,7 @@ Route::group(
             Route::get('area-data-ajax', [AdminAreaController::class, 'Ajax'])->name('area.ajax');
             Route::resource('subarea', SubAreaController::class);
             Route::get('subarea-data', [SubAreaController::class, 'SubAreaData'])->name('subarea.data');
+            Route::get('subarea-data-ajax', [SubAreaController::class, 'Ajax'])->name('subarea.ajax');
 
             Route::resource('province', ProvinceController::class);
             Route::get('province-data', [ProvinceController::class, 'provinceData'])->name('province.data');

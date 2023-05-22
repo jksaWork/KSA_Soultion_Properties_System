@@ -18,19 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(LaraTrustSeeder::class);
-        Admin::factory(1)->create();
-        Client::factory(1)->create();
-        Owner::factory(1)->create([
-            'email' => 'owner@gmail.com',
-            'password' => bcrypt('123456'),
-        ]);
-        $this->call(
-            [
-                ServiceSeeder::class,
-                AgentSeeder::class,
-                AreaSedder::class,
-            ]
-        );
+
 
 
         // Banks IS
@@ -53,5 +41,40 @@ class DatabaseSeeder extends Seeder
                 'name' => $value,
             ]);
         }
+
+        $province = ["المدينه", "جده", "مكه", "الرياض"];
+        foreach ($province  as $key => $value) {
+            \App\Models\Area::factory(1)->create([
+                'name' => $value,
+            ]);
+        }
+
+        $province = ["شقراء", "الخرج", "الدرعيه ", "عفيف"];
+        foreach ($province  as $key => $value) {
+            \App\Models\Province::factory(1)->create([
+                'name' => $value,
+            ]);
+        }
+
+        $province = ["حديقة الملك سلمان", "حي الازدهار", "حي الجزيرة ", "عفيف"];
+        foreach ($province  as $key => $value) {
+            \App\Models\SubArea::factory(1)->create([
+                'name' => $value,
+            ]);
+        }
+
+        Admin::factory(1)->create();
+        Client::factory(1)->create();
+        Owner::factory(1)->create([
+            'email' => 'owner@gmail.com',
+            // 'password' => bcrypt('123456'),
+        ]);
+        $this->call(
+            [
+                ServiceSeeder::class,
+                AgentSeeder::class,
+                AreaSedder::class,
+            ]
+        );
     }
 }

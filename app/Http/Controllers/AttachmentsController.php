@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Agent;
 use App\Models\Attachments;
 use App\Models\Offer;
+use App\Models\Owner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -13,26 +14,30 @@ class AttachmentsController extends Controller
 {
     public function store(Request $request)
     {
-        $request->validate([
-            'attachments' => 'required',
-            'agent_id' => 'required',
-        ]);
-        $attachmentable = Agent::find($request->agent_id) ?? Offer::find($request->agent_id);
-        // dd($agent);
+        $request->validate(
+            [
+                'attachments' => 'required',
+                'attachmentable' => 'required',
+                'type' => 'required',
+            ],
+            ['required' => __('translation.attachment_is_required')]
+        );
+
+        // dd($request->type);
+        $attachmentableArray = Attachments::getAttachableModel($request->type);
+        // dd($attachmentableArray);
+        // Get Attachable From And Route And Key From Function getAttachableModel
+        [$attachmentableClass, $route, $routeKey] = $attachmentableArray;
+        $attachmentable = $attachmentableClass::find($request->attachmentable);
+        // dd($attachmentableArray);
         foreach ($request->attachments  as $key => $file) {
             $file_name =  $file->hashName();
-            $file->store('offers/attachments',  'public');
+            $file->store($routeKey . '/attachments',  'public');
             $attachment = new Attachments();
             $attachment->url = $file_name;
             $attachmentable->attachments()->save($attachment);
         }
-        $route = 'agent.show';
-        $routeKey = 'agent';
-        if($attachmentable instanceof Offer) {
-            $route ='offers.show';
-            $routeKey = 'offer';
-        }
-            return redirect()->route($route, [$routeKey => $request->agent_id])->with(['success' => 'done']);
+        return redirect()->route($route, [$routeKey => $attachmentable->id])->with(['success' => __('translation.the_file_was_uploaded_success')]);
     }
 
     /**
@@ -70,19 +75,17 @@ class AttachmentsController extends Controller
     public  function show($id)
     {
         $file_name = Attachments::find($id)->url;
-        if(Str::startsWith($file_name, 'http://localhost:8000/'))
-            $file_name = Str::replaceFirst('http://localhost:8000/' ,  '' , $file_name);
-
-        $pathToFile = Storage::disk('public')->getAdapter()->applyPathPrefix($file_name);
-        return response()->file($pathToFile);
+        if (Str::startsWith($file_name, 'https://futurecompany.edhub.sd'))
+            $file_name = Str::replaceFirst('https://futurecompany.edhub.sd',  '', $file_name);
+        return response()->file(public_path($file_name));
     }
 
-    public  function download($id)
+    public function download($id)
     {
         $file_name = Attachments::find($id)->url;
-        if(Str::startsWith($file_name, 'http://localhost:8000/'))
-            $file_name = Str::replaceFirst('http://localhost:8000/' ,  '' , $file_name);
-        $pathToFile = Storage::disk('public')->getAdapter()->applyPathPrefix($file_name);
+        if (Str::startsWith($file_name, 'https://futurecompany.edhub.sd'))
+            $file_name = Str::replaceFirst('https://futurecompany.edhub.sd',  '', $file_name);
+        $pathToFile = public_path($file_name);
         return response()->download($pathToFile);
     }
 }

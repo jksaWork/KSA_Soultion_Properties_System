@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Area;
+use App\Models\Province;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SubAreaFactory extends Factory
@@ -14,7 +16,9 @@ class SubAreaFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->name,
+            'area_id' => Area::get()->random()->id,
+            'province_id' => Province::get()->random()->id,
         ];
     }
 }

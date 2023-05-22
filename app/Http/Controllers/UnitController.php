@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Unit;
+use App\Traits\HasSelect2Ajax;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class UnitController extends Controller
+abstract class UnitControllerAbstarct extends Controller
 {
+    use HasSelect2Ajax;
+}
+class UnitController extends UnitControllerAbstarct
+{
+    public $Model = Unit::class;
     /**
      * Display a listing of the resource.
      *

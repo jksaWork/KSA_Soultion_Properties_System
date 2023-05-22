@@ -26,12 +26,17 @@ class OwnersRequest extends FormRequest
         $roles =  [
             'name' => 'required',
             'email' => 'email|unique:owners,email',
-            'password'=>'required',
+            'bank_id' => 'required',
+            'subarea_id' => 'required',
+            'province_id' => 'required',
             'phone' => 'required|numeric',
-            'agent_id' => 'nullable',
+            'id_number' => 'required',
+            'iban_number' => 'required',
+            'address' => 'required',
+            // 'agent_id' => 'nullable',
         ];
         // dd(request()->email);
-        if(request()->method() == 'PUT'){
+        if (request()->method() == 'PUT') {
             $roles['email'] = 'exists:owners,email';
         }
         // dd($email);

@@ -129,4 +129,25 @@ class BankController extends Controller
     {
         //
     }
+
+
+    public function Ajax()
+    {
+
+        $search = request()->search;
+
+        $employees = Bank::when($search, function ($q) use ($search) {
+            $q->where('name', 'like', '%' . $search . '%');
+        })
+            ->limit(5)->get();
+        //  Return Reponose
+        $response = array();
+        foreach ($employees as $employee) {
+            $response[] = array(
+                "id" => $employee->id,
+                "text" => $employee->name
+            );
+        }
+        return response()->json($response);
+    }
 }

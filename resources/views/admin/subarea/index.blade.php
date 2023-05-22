@@ -49,7 +49,7 @@
                                    <div class="row">
                                         <div class="col-md-12">
                                              <div class="table-responsive">
-                                                  <table class="table datatable align-middle table-row-dashed fs-6 gy-5" id="roles-table" style="width: 100%;">
+                                                  <table class="table datatable  table-row-dashed fs-6 gy-5" id="roles-table" style="width: 100%;">
                                                        <thead>
                                                             <tr>
                                                                  <th class="text-center">
@@ -62,6 +62,8 @@
                                                                  </th>
                                                                  <th class="text-center">{{ __('translation.name') }}</th>
                                                                  <th class="text-center">{{ __('translation.status') }}</th>
+                                                                 <th class="text-center">{{ __('translation.area') }}</th>
+                                                                 <th class="text-center">{{ __('translation.province') }}</th>
                                                                  <th class="text-center">{{ __('translation.number_of_realstate') }}</th>
                                                                  <th class="text-center">{{ __('translation.created_at') }}</th>
                                                                  <th class="text-center">{{ __('translation.action') }}</th>
@@ -107,7 +109,7 @@
 
                                              <div class="form-group mb-2 ">
                                                   <label for="">{{ __('translation.area') }}</label>
-                                                  <select id='area_select' style='width:100%' name='area_id'>
+                                                  <select id='area_select' style='width:100%'  class='form-control' name='area_id'>
                                                        <option value='0'> {{ __('translation.chose_area') }}
                                                        </option>
                                                   </select>
@@ -261,7 +263,7 @@
 
                     // alert('worgiing');
                     // var isadmin = @json(auth()->guard('admin')->check());
-                    var OfferColums = [{
+                    var Colums = [{
                               data: 'record_select'
                               , name: 'record_select'
                               , searchable: false
@@ -276,6 +278,14 @@
                          , {
                               data: 'status'
                               , name: 'status'
+                         }
+                         , {
+                              data: 'area'
+                              , name: 'area'
+                         }
+                         , {
+                              data: 'province'
+                              , name: 'province'
                          }
                          , {
                               data: 'realstate_count'
@@ -304,7 +314,7 @@
                          , ajax: {
                               url: '{{ route('subarea.data') }}'
                          , }
-                         , columns: OfferColums
+                         , columns: Colums
                          , order: [
                               [3, 'desc']
                          ]
