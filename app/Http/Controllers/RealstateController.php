@@ -38,8 +38,8 @@ class RealstateController extends Controller
             ->addColumn('opration_precentage', function ($owner) {
                 return '10%';
             })
-            ->addColumn('realstate_units', function ($owner) {
-                return "<a class='btn btn-sm btn-primary'>الوحدات</a>";
+            ->addColumn('realstate_units', function ($realstate) {
+                return view('realstates.data_table.units', compact('realstate'));
             })
             ->addColumn('unit', function ($owner) {
                 return $owner->Unit->name ?? '';

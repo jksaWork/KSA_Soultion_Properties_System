@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RealStateUnitRequest;
+use App\Models\Realstate;
 use App\Models\RealstateUnit;
 use Illuminate\Http\Request;
 
@@ -24,7 +26,11 @@ class RealstateUnitController extends Controller
      */
     public function create()
     {
-        return view('realstateunit.create');
+        $floors = [];
+        for ($i = 0; $i < 10; $i++) {
+            $floors[$i] = $i + 1 . '_floor';
+        }
+        return view('realstateunit.create', compact('floors'));
     }
 
     /**
@@ -33,9 +39,17 @@ class RealstateUnitController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RealStateUnitRequest $request)
     {
-        //
+        // return $request;
+        // return $this->request()
+        try {
+            $data =  $request->except('_token');
+            RealstateUnit::create($data);
+            return redirect()->route('realstate.show', $request->realstate_id);
+        } catch (\Throwable $th) {
+            return redirect()->back()->withErrors(__('translation.6'));
+        }
     }
 
     /**
@@ -55,9 +69,11 @@ class RealstateUnitController extends Controller
      * @param  \App\Models\RealstateUnit  $realstateUnit
      * @return \Illuminate\Http\Response
      */
-    public function edit(RealstateUnit $realstateUnit)
+    public function edit($realstateUnit_id)
     {
-        //
+        $realstateUnit  = RealstateUnit::with('Unit')->find($realstateUnit_id);
+        // dd($realstateUnit);
+        return view('realstateunit.edit', compact('realstateUnit'));
     }
 
     /**
@@ -67,10 +83,19 @@ class RealstateUnitController extends Controller
      * @param  \App\Models\RealstateUnit  $realstateUnit
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RealstateUnit $realstateUnit)
+    public function update(RealStateUnitRequest $request, $id)
     {
-        //
+
+        try {
+            $realstateUnit = RealstateUnit::find($id);
+            $data =  $request->except('_token');
+            $realstateUnit->update($data);
+            return redirect()->route('realstate.show', $request->realstate_id);
+        } catch (\Throwable $th) {
+            return redirect()->back()->withErrors(__('translation.6'));
+        }
     }
+
 
     /**
      * Remove the specified resource from storage.

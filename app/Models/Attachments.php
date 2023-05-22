@@ -19,7 +19,7 @@ class Attachments extends Model
         switch ($this->attachable_type) {
             case 'App\Models\Owner':
                 return  asset('owner/attachments/' . $key);
-            case 'App\Models\RealState':
+            case 'App\Models\Realstate':
                 return  asset('realstates/attachemnts/' . $key);
 
             case 'App\Models\StudentRevenue':

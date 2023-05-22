@@ -22,7 +22,7 @@
                     <div class="card-body pt-0">
                          {{-- @include('layouts.includes.session') --}}
                          @include('layouts.includes.session')
-                         <form action="{{ route('owners.store')}}" method="post" id='owner_form' enctype="multipart/form-data">
+                         <form action="{{ route('realstate.unit.store')}}" method="post" id='owner_form' enctype="multipart/form-data">
                               @csrf
                               <div class="border rodunded-sm ">
                                    <div class="col-md-12 bg-secondary p-4 rodunded-xl">
@@ -35,19 +35,25 @@
                                         $options = ['commercial', 'residential'];
                                         @endphp
                                         <x:text-input name='name' class='col-md-6' />
+                                        <x:text-input name='realstate_id' class='col-md-6' :value='request()->realstate' />
                                         <x:select-options name='activity_type' class='col-md-6' :options="$options" />
                                         <x:select2-input name='unit' class='col-md-6' />
                                         <x:text-input name='halls_number' class='col-md-6' />
                                         <x:text-input name='room_number' class='col-md-6' />
                                         <x:text-input name='bathroom_number' class='col-md-6' />
                                         <x:text-input name='external_doors_number' class='col-md-6' />
-                                        <x:text-input name='floor_number' class='col-md-6' />
+                                        {{-- <x:select-options :options='$floors' name='floor_number' class='col-md-6' /> --}}
+                                        <div class="form-group col-md-6">
+                                             <label for="">{{ __('translation.floor_number') }}</label>
+                                             <select class="form-control" name="floor_number" id="">
+                                                  @for($i = 1; $i <= 10; $i++) <option value='{{ $i }}'>{{ __('translation.' . $i . '_floor' ) }}
+                                                       </option>
+                                                       @endfor </select>
+                                        </div>
                                         <x:text-input name='space' class='col-md-6' />
                                         <x:text-input name='virtual_value' class='col-md-6' />
                                    </div>
-                                   @if (auth()->guard('web')->check())
-                                   <x:text-input name='agent_id' class='col-md-6' value="{{auth()->user()->agent_id ?? ''}}" />
-                                   @endif
+
                               </div>
                               <div class="border rodunded-sm mt-10 ">
                                    <div class="col-md-12 bg-secondary p-4 rodunded-xl">
@@ -89,37 +95,36 @@
                // Specify validation rules
                rules: {
                     name: "required"
-                    , phone: "required"
-                    , address: "required"
-                    , province_id: "required"
-                    , subarea_id: "required"
-                    , bank_id: "required"
-                    , id_number: "required"
-                    , iban_number: "required"
-                    , email: {
-                         required: true
-                         , email: true
-                    }
-                    , password: {
-                         required: true
-                         , minlength: 5
-                    }
+                    , unit_id: "required"
+                    , activity_type: "required"
+                    , bathroom_number: "required"
+                    , room_number: "required"
+                    , halls_number: "required"
+                    , virtual_value: "required"
+                    , external_doors_number: "required"
+                    , floor_number: "required"
+                    , space: "required"
+                    , water_account_number: "required"
+                    , electricity_account_number: "required"
+
                },
                // Specify validation error messages
                messages: {
                     name: "{{ __('translation.valid.required') }}"
                     , id_number: "{{ __('translation.valid.required') }}"
-                    , iban_number: "{{ __('translation.valid.required') }}"
-                    , bank_id: "{{ __('translation.valid.required') }}"
-                    , province_id: "{{ __('translation.valid.required') }}"
-                    , subarea_id: "{{ __('translation.valid.required') }}"
-                    , address: "{{ __('translation.valid.required') }}"
-                    , phone: "{{ __('translation.valid.required') }}",
-                    //   lastname: "Please enter your lastname",
-                    password: {
-                         required: "Please provide a password"
-                         , minlength: "Your password must be at least 5 characters long"
-                    }
+                    , phone: "{{ __('translation.valid.required') }}"
+                    , name: "{{ __('translation.valid.required') }}"
+                    , unit_id: "{{ __('translation.valid.required') }}"
+                    , activity_type: "{{ __('translation.valid.required') }}"
+                    , bathroom_number: "{{ __('translation.valid.required') }}"
+                    , room_number: "{{ __('translation.valid.required') }}"
+                    , halls_number: "{{ __('translation.valid.required') }}"
+                    , virtual_value: "{{ __('translation.valid.required') }}"
+                    , external_doors_number: "{{ __('translation.valid.required') }}"
+                    , floor_number: "{{ __('translation.valid.required') }}"
+                    , space: "{{ __('translation.valid.required') }}"
+                    , water_account_number: "{{ __('translation.valid.required') }}"
+                    , electricity_account_number: "{{ __('translation.valid.required') }}"
                     , email: "{{ __('translation.valid.email') }}"
                     , required: "{{ __('translation.valid.required') }}"
                },
@@ -144,9 +149,9 @@
      //     province_id= $(this).val();
      // })
 
-     $("#bank_select").select2({
+     $("#unit_select").select2({
           ajax: {
-               url: "{{ route('banks.ajax') }}"
+               url: "{{ route('units.ajax') }}"
                , type: "get"
                , dataType: 'json'
                , delay: 250
