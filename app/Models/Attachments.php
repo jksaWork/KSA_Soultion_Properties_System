@@ -25,6 +25,10 @@ class Attachments extends Model
             case 'App\Models\StudentRevenue':
                 return  asset('revenue/attachments/' . $key);
 
+            case 'App\Models\Client':
+                return  asset('client/attachments/' . $key);
+
+                break;
             default:
                 return asset('agents/attachments/' . $key);;
         }
@@ -57,6 +61,10 @@ class Attachments extends Model
 
             case 'realstate':
                 return [RealState::class, 'realstate.show', 'realstate'];
+
+            case 'client':
+                return [Client::class, 'clients.show', 'client'];
+
             default:
                 return [Owner::class, 'owners.show', 'owner'];
         }

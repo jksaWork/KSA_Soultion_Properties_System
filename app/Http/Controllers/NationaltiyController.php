@@ -3,11 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Nationaltiy;
+use App\Traits\HasSelect2Ajax;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class NationaltiyController extends Controller
+abstract class NationaltiyControllerAbstarct extends Controller
 {
+    use HasSelect2Ajax;
+}
+class NationaltiyController extends NationaltiyControllerAbstarct
+{
+    public $Model = Nationaltiy::class;
+
     /**
      * Display a listing of the resource.
      *

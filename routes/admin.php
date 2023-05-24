@@ -17,6 +17,7 @@ use App\Http\Controllers\AssingOrderToClientController;
 use App\Http\Controllers\AttachmentsController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ContractController;
 use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\NationaltiyController;
 use App\Http\Controllers\OfferController;
@@ -114,6 +115,20 @@ Route::group(
             Route::get('owner-data-ajax', [OwnerController::class, 'Ajax'])->name('owners.ajax');
 
 
+            // Clients Routes
+            Route::resource('clients', ClientController::class);
+            Route::get('owner-data', [ClientController::class, 'ClientData'])->name('clients.data');
+            Route::get('owner-data-ajax', [ClientController::class, 'Ajax'])->name('owners.ajax');
+            //
+
+            // Clients Routes
+            Route::resource('contracts', ContractController::class);
+            Route::get('contracts-data', [ContractController::class, 'ContractsData'])->name('clients.data');
+            Route::get('contract-data-ajax', [ClientCoContractControllerntroller::class, 'Ajax'])->name('contracts.ajax');
+            //
+            // Route::
+
+
             Route::resource('realstate', RealstateController::class);
             Route::get('realstate-data', [RealstateController::class, 'RealstateData'])->name('realstate.data');
             // Route::resource('realstate', UserController::class);
@@ -157,7 +172,7 @@ Route::group(
             // Service Resource
             Route::resource('services', ServiceController::class);
             // Clients Resource
-            Route::resource('clients', ClientController::class);
+            // Route::resource('clients', ClientController::class);
 
             // Agent Controller
             Route::resource('agent',  AgentController::class);

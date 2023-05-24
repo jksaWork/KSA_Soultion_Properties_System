@@ -46,12 +46,13 @@ class OwnerController extends OwnerControllerAbstract
 
         return  DataTables::of($query)
             ->addColumn('record_select', 'admin.owners.data_table.record_select')
+            ->addColumn('properties', fn ($owner) => view('admin.owners.data_table.realstates', compact('owner')))
             ->editColumn('created_at', function ($area) {
                 return $area->created_at->format('Y-m-d');
             })
-            ->addColumn('properties', function ($owner) {
-                return '<span class="btn btn-sm btn-info">(12)العقارات</span>';
-            })
+            // ->addColumn('properties', function ($owner) {
+            //     return '<span class="btn btn-sm btn-info">(12)العقارات</span>';
+            // })
             ->editColumn('created_at', function ($area) {
                 return $area->created_at->format('Y-m-d');
             })

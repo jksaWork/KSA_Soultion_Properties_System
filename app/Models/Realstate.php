@@ -46,7 +46,7 @@ class Realstate extends Model
         return $this->belongsTo(Owner::class);
     }
 
-    public function RealStateUnits()
+    public function RealstateUnits()
     {
         return $this->hasMany(RealstateUnit::class);
     }

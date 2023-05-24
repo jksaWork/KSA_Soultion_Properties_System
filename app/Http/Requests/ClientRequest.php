@@ -26,11 +26,16 @@ class ClientRequest extends FormRequest
         $roles =  [
             'name' => 'required',
             'email' => 'email|unique:clients,email',
-            'password'=>'required',
             'phone' => 'required|numeric',
+            // 'nationalaity_id' => 'required',
+            'id_type' => 'required',
+            'id_number' => 'required',
+            'subarea_id' => 'required',
+            'province_id' => 'required',
+            'address' => 'required',
         ];
         // dd(request()->email);
-        if(request()->method() == 'PUT'){
+        if (request()->method() == 'PUT') {
             $roles['email'] = 'exists:clients,email';
         }
         // dd($email);

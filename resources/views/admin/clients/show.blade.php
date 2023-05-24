@@ -1,6 +1,7 @@
 @extends('layouts.admin.admin')
-@section('main-head', __('translation.show_owners_detalis'))
+@section('main-head', __('translation.show_client_detalis'))
 @section('content')
+{{-- @dd('asdas') --}}
 <div class="post d-flex flex-column-fluid" id="kt_post">
      <!--begin::Container-->
      <div id="kt_content_container" class="container-xxl">
@@ -17,7 +18,7 @@
                                    </li>
                                    <li class="nav-item">
                                         <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_10">
-                                             {{ __('translation.realstates') }}</a>
+                                             {{ __('translation.contracts') }}</a>
                                    </li>
                                    <li class="nav-item">
                                         <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_9">
@@ -41,25 +42,25 @@
                                                                  <th scope="row">
                                                                       <b>{{ __('translation.title') }}</b>
                                                                  </th>
-                                                                 <td>{{ $owner->name }}</td>
+                                                                 <td>{{ $client->name }}</td>
                                                                  <th scope="row">{{ __('translation.id_number') }}</th>
-                                                                 <td>{{ $owner->id_number }}</td>
+                                                                 <td>{{ $client->id_number }}</td>
                                                             </tr>
                                                             <tr>
                                                                  <th scope="row">{{ __('translation.address') }}</th>
-                                                                 <td>{{ $owner->address }}</td>
+                                                                 <td>{{ $client->address }}</td>
                                                                  <th scope="row">{{ __('translation.email') }}</th>
-                                                                 <td>{{ $owner->email }}</td>
+                                                                 <td>{{ $client->email }}</td>
                                                             </tr>
                                                             <tr class="fw-bolder text-muted bg-light">
                                                                  <th scope="row">{{ __('translation.province') }}</th>
-                                                                 <td>{{ $owner->Province->name ?? '' }}</td>
+                                                                 <td>{{ $client->Province->name ?? '' }}</td>
                                                                  <th scope="row">{{ __('translation.single_subarea') }}</th>
-                                                                 <td>{{ $owner->SubArea->name }}</td>
+                                                                 <td>{{ $client->SubArea->name }}</td>
                                                             </tr>
                                                             <tr>
                                                                  <th scope="row">{{ __('translation.status') }}</th>
-                                                                 <td>{!! $owner->getStatusWithSpan() !!}</td>
+                                                                 <td>{!! $client->getStatusWithSpan() !!}</td>
                                                             </tr>
                                                        </thead>
                                                        <!--end::Table head-->
@@ -82,8 +83,8 @@
                                    <div>
                                         <form action="{{ route('attachments.store') }}" method="post" enctype="multipart/form-data">
                                              @csrf
-                                             <input type="hidden" name='type' value='owner'>
-                                             <input type="hidden" name="attachmentable" value='{{ $owner->id }}'>
+                                             <input type="hidden" name='type' value='client'>
+                                             <input type="hidden" name="attachmentable" value='{{ $client->id }}'>
                                              <x:input-file class="col-12" name='attachments[]' />
                                              <button class="btn btn-light-primary mt-3">{{ __('translation.Attach') }} </button>
                                         </form>
@@ -100,13 +101,13 @@
                                              </tr>
                                         </thead>
                                         <tbody>
-                                             {{-- dd($owner->attachments); --}}
-                                             @if (count($owner->attachments) > 0)
-                                             @foreach ($owner->attachments as $attachment)
+                                             {{-- dd($client->attachments); --}}
+                                             @if (count($client->attachments) > 0)
+                                             @foreach ($client->attachments as $attachment)
                                              <tr>
                                                   <td class=" "> {{ $attachment->id }}</td>
                                                   <td class=" "> <img src="{{ $attachment->url }}" width="80" alt=""></td>
-                                                  <td class=" "> {{ $owner->title }}</td>
+                                                  <td class=" "> {{ $client->title }}</td>
                                                   <td class=" ">
                                                        <div style="">
                                                             <a href="{{ route('show_attachments', $attachment->id) }}" class="btn btn-light-primary btn-sm btn-icon">
@@ -127,13 +128,7 @@
                                         </tbody>
                                    </table>
                               </div>
-                              <div class="tab-pane fade" id="kt_tab_pane_10" role="tabpanel">
-                                   {{-- <x:show-unit :realstateunits='$realstate->RealstateUnits' realstate='$realstate->id' /> --}}
-                                   <div>
-                                        {{-- @dd($owner->Realstates) --}}
-                                        <x:owner-realstate :realstates='$owner->Realstates' />
-                                   </div>
-                              </div>
+
 
 
                               <div class="tab-pane fade" id="kt_tab_pane_11" role="tabpanel">
@@ -159,27 +154,27 @@
                                              </thead>
                                              <!--end::Table head-->
                                              <!--begin::Table body-->
-                                             <tbody class="fw-bold text-gray-600">
-                                                  @forelse ($owner->Realstates as $item)
+                                             {{-- <tbody class="fw-bold text-gray-600">
+                                                  @forelse ($client->Contracts as $item)
                                                   <tr>
                                                        <td> {{ $item->id }}</td>
-                                                       <td> {{ $item->name }}</td>
-                                                       <td> {{ $item->phone }}</td>
-                                                       <td> {{ $item->workplace }}</td>
-                                                       <td> {{ $item->identification_type }}</td>
-                                                       <td> {{ $item->identification_number }}</td>
-                                                       <td>
-                                                            {!! $item->getStatusWithSpan() !!}
-                                                       </td>
-                                                  </tr>
-                                                  @empty
-                                                  <tr>
-                                                       <td collspan='12'>
-                                                            {{ __('translation.no_data_found') }}
-                                                       </td>
-                                                  </tr>
-                                                  @endforelse
-                                             </tbody>
+                                             <td> {{ $item->name }}</td>
+                                             <td> {{ $item->phone }}</td>
+                                             <td> {{ $item->workplace }}</td>
+                                             <td> {{ $item->identification_type }}</td>
+                                             <td> {{ $item->identification_number }}</td>
+                                             <td>
+                                                  {!! $item->getStatusWithSpan() !!}
+                                             </td>
+                                             </tr>
+                                             @empty
+                                             <tr>
+                                                  <td collspan='12'>
+                                                       {{ __('translation.no_data_found') }}
+                                                  </td>
+                                             </tr>
+                                             @endforelse
+                                             </tbody> --}}
                                         </table>
                                    </div>
                               </div>
