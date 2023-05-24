@@ -18,6 +18,7 @@ use App\Http\Controllers\AttachmentsController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\MaintenanceController;
+use App\Http\Controllers\NationaltiyController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\ProvinceController;
@@ -87,6 +88,12 @@ Route::group(
             Route::resource('banks', BankController::class);
             Route::get('banks-data', [BankController::class, 'BanksData'])->name('banks.data');
             Route::get('banks-data-ajax', [BankController::class, 'Ajax'])->name('banks.ajax');
+
+            //  Nationaltiy Routes
+            Route::resource('nationnalty', NationaltiyController::class);
+            Route::get('nationnalty-data', [NationaltiyController::class, 'NationnaltyData'])->name('nationnalty.data');
+            Route::get('nationnalty-data-ajax', [NationaltiyController::class, 'Ajax'])->name('nationnalty.ajax');
+
             // Insert units
             Route::resource('units', UnitController::class);
             Route::get('units-data', [UnitController::class, 'UnitData'])->name('units.data');

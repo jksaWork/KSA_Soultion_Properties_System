@@ -56,6 +56,13 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
+        $nationaltis = ["سوريا", "لبنان", " المملكه العربيه السعوديه ", "السودان"];
+        foreach ($nationaltis  as $key => $value) {
+            \App\Models\Nationaltiy::factory(1)->create([
+                'name' => $value,
+            ]);
+        }
+
         $province = ["حديقة الملك سلمان", "حي الازدهار", "حي الجزيرة ", "عفيف"];
         foreach ($province  as $key => $value) {
             \App\Models\SubArea::factory(1)->create([

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bank;
-use App\Models\Maintenance;
+use App\Models\Nationaltiy;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class BankController extends Controller
+class NationaltiyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,27 @@ class BankController extends Controller
      */
     public function index()
     {
-        return view('bank.index');
+        return view('nationaltiy.index');
+    }
+
+
+    public function NationnaltyData()
+    {
+        $query =  Nationaltiy::query();
+        return  DataTables::of($query)
+            ->addColumn('record_select', 'bank.data_table.record_select')
+            ->editColumn('created_at', function ($bank) {
+                return $bank->created_at->format('Y-m-d');
+            })
+            ->editColumn('status', function ($bank) {
+                return $bank->getStatusWithSpan();
+            })
+            // ->addColumn('actions', 'bank.data_table.actions')
+            ->addColumn('actions', function ($bank) {
+                return view('nationaltiy.data_table.actions', compact('bank'));
+            })
+            ->rawColumns(['record_select', 'actions', 'status', 'roles', 'service', 'type', 'area'])
+            ->toJson();
     }
 
     /**
@@ -43,10 +62,11 @@ class BankController extends Controller
                 'name' => 'required',
             ]);
 
-            $bank = Bank::create($data);
+            $bank = Nationaltiy::create($data);
             session()->flash('success',  __('translation.1'));
             return redirect()->back();
         } catch (\Throwable $th) {
+            // dd($th);
             return redirect()->back()->withErrors(__('translation.6'));
         }
     }
@@ -54,43 +74,26 @@ class BankController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Bank  $bank
+     * @param  \App\Models\Nationaltiy  $nationaltiy
      * @return \Illuminate\Http\Response
      */
-    public function show(Bank $bank)
+    public function show($nationaltiy_id)
     {
-        // dd($bank);
-        $bank->ChangeStatus();
+
+        // $nationaltiy->ChangeStatus()
+        Nationaltiy::find($nationaltiy_id)->ChangeStatus();
         // return redirect()->back();
         if (!request()->ajax()) return redirect()->back();
         return  response()->json(['sccuess' => true], 200);
     }
 
-    public function BanksData()
-    {
-        $query = Bank::query();
-        return  DataTables::of($query)
-            ->addColumn('record_select', 'bank.data_table.record_select')
-            ->editColumn('created_at', function ($bank) {
-                return $bank->created_at->format('Y-m-d');
-            })
-            ->editColumn('status', function ($bank) {
-                return $bank->getStatusWithSpan();
-            })
-            // ->addColumn('actions', 'bank.data_table.actions')
-            ->addColumn('actions', function ($bank) {
-                return view('bank.data_table.actions', compact('bank'));
-            })
-            ->rawColumns(['record_select', 'actions', 'status', 'roles', 'service', 'type', 'area'])
-            ->toJson();
-    }
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Bank  $bank
+     * @param  \App\Models\Nationaltiy  $nationaltiy
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bank $bank)
+    public function edit(Nationaltiy $nationaltiy)
     {
         //
     }
@@ -99,22 +102,24 @@ class BankController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Bank  $bank
+     * @param  \App\Models\Nationaltiy  $nationaltiy
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bank $bank)
+    public function update(Request $request,  $nationaltiy_id)
     {
-        // return $bank;
+        // dd($nationaltiy_id);
         try {
             // dd('asd');
             $data = $request->validate([
                 'name' => 'required',
             ]);
 
-            $bank = $bank->update($data);
+            $Nationaltiy = Nationaltiy::find($nationaltiy_id);
+            $Nationaltiy->update($data);
             session()->flash('success',  __('translation.2'));
             return redirect()->back();
         } catch (\Throwable $th) {
+            // dd()
             return redirect()->back()->withErrors(__('translation.6'));
         }
     }
@@ -122,32 +127,11 @@ class BankController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Bank  $bank
+     * @param  \App\Models\Nationaltiy  $nationaltiy
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bank $bank)
+    public function destroy(Nationaltiy $nationaltiy)
     {
         //
-    }
-
-
-    public function Ajax()
-    {
-
-        $search = request()->search;
-
-        $employees = Bank::when($search, function ($q) use ($search) {
-            $q->where('name', 'like', '%' . $search . '%');
-        })
-            ->limit(5)->get();
-        //  Return Reponose
-        $response = array();
-        foreach ($employees as $employee) {
-            $response[] = array(
-                "id" => $employee->id,
-                "text" => $employee->name
-            );
-        }
-        return response()->json($response);
     }
 }

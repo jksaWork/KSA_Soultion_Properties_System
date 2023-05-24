@@ -19,6 +19,7 @@
         "laravel/ui": "^3.4",
         "mcamara/laravel-localization": "^1.7",
         "mckenziearts/laravel-notify": "^2.3",
+        "monarobase/country-list": "^3.4",
         "santigarcor/laratrust": "^7.1",
         "tinymce/tinymce": "^6.4",
         "yajra/laravel-datatables": "^1.5",

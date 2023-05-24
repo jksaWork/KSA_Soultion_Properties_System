@@ -189,6 +189,15 @@
                                         </a>
                                    </div>
                                    <div class="menu-item">
+                                        <a class="menu-link" href="{{ route('nationnalty.index') }}">
+                                             <span class="menu-bullet">
+                                                  <span class="bullet bullet-dot"></span>
+                                             </span>
+                                             <span class="menu-title">{{ __('translation.nationnaltys') }}</span>
+                                        </a>
+                                   </div>
+
+                                   <div class="menu-item">
                                         <a class="menu-link" href="{{ route('maintenance.index') }}">
                                              <span class="menu-bullet">
                                                   <span class="bullet bullet-dot"></span>

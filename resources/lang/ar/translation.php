@@ -308,5 +308,10 @@ return [
     '9_floor' => 'الطابق التاسع',
     '10_floor' => 'الطابق العاشر',
     // 'activity_type' => 'انواع الانشطه'
-    'single_units' => 'وحدات'
+    'single_units' => 'وحدات',
+    'nationnaltys' => 'الجنسيات',
+    'add_nationnalty' => 'اضافه جنسيات',
+    'search_on_nationlty' => 'بحث في الجنسيات',
+    'add_nationalty' => 'اضافه جنسيات',
+    'edit_nationalaity' => 'تعديل بيانات الجنسيه',
 ];
