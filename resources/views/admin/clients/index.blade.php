@@ -77,6 +77,7 @@
                                         <th class="">{{ __('translation.phone') }}</th>
                                         <th class="">{{ __('translation.email') }}</th>
                                         <th class="">{{ __('translation.status') }}</th>
+                                        <th class="">{{ __('translation.contracts') }}</th>
                                         {{-- <th class="">{{ __('translation.properties') }}</th> --}}
                                         <th class="text-end min-w-70px">{{ __('translation.action') }}</th>
                                    </tr>
@@ -169,6 +170,11 @@
           {
                data: 'status'
                , name: 'status'
+          },
+
+          {
+               data: 'contracts'
+               , name: 'contracts'
           },
 
           {

@@ -33,6 +33,7 @@
                                    <div>
                                         <div class="tab-pane fade show active" id="kt_table_widget_7_tab_1">
                                              <!--begin::Table container-->
+
                                              <div class="table-responsive">
                                                   <!--begin::Table-->
                                                   <table class="table align-middle gs-0 gy-3">
@@ -127,6 +128,10 @@
                                              @endif
                                         </tbody>
                                    </table>
+                              </div>
+
+                              <div class="tab-pane fade" id="kt_tab_pane_10" role="tabpanel">
+                                   <x:show-contracts :contracts='$client->Contracts' />
                               </div>
 
 

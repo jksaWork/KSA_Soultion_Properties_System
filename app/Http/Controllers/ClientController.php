@@ -44,6 +44,9 @@ class ClientController extends ClientControllerAbstract
 
         $query = Client::with('Nationalaity');
         return  DataTables::of($query)
+            ->addColumn('contracts', function ($client) {
+                return view('realstates.data_table.contracts', compact('client'));
+            })
             ->addColumn('record_select', 'admin.clients.data_table.record_select')
             // ->addColumn('properties', fn ($owner) => view('admin.owners.data_table.realstates', compact('owner')))
             ->editColumn('created_at', function ($area) {

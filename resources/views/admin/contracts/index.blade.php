@@ -176,6 +176,11 @@
                , name: 'amount'
           }
           , {
+               data: 'contracts'
+               , name: 'contracts'
+               //    , width: '10%'
+          }
+          , {
                data: 'realstate_units'
                , name: 'realstate_units'
                , width: '10%'

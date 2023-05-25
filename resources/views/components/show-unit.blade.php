@@ -13,120 +13,82 @@
 
                     <div class="modal fade " tabindex="-1" id="kt_modal_{{ $realstate->id }}">
                          <div class="modal-dialog modal-xl ">
-                              {{-- <div class="modal-content "> --}}
-                              {{-- <div class="modal-header"> --}}
-                              {{-- <h5 class="modal-title">{{ __('translation.single_units') }} {{ $realstate->name }}</h5> --}}
-                              <!--begin::Close-->
-                              {{-- <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close"> --}}
-                              {{-- <span class="svg-icon svg-icon-2x"></span> --}}
-                              {{-- </div> --}}
-                              <!--end::Close-->
-                              {{-- </div> --}}
+                              <div class="modal-content">
+                                   <!--begin::Form-->
+                                   <form class="form" action="{{ route('contracts.sync' , $realstate->id) }}" method="post">
+                                        @csrf
+                                        <!--begin::Modal header-->
+                                        <div class="modal-header" id="kt_modal_add_customer_header">
+                                             <!--begin::Modal title-->
+                                             <h2 class="fw-bolder">{{ __('translation.add_area') }}</h2>
+                                             <!--end::Modal title-->
+                                             <!--begin::Close-->
+                                             <div id="kt_modal_add_customer_close" data-bs-dismiss="modal" aria-label="Close" class="btn btn-icon btn-sm btn-active-icon-primary">
+                                                  <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                                  <span class="svg-icon svg-icon-1">
+                                                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                                       </svg>
+                                                  </span>
+                                                  <!--end::Svg Icon-->
+                                             </div>
+                                             <!--end::Close-->
+                                        </div>
+                                        <!--end::Modal header-->
+                                        <!--begin::Modal body-->
+                                        <div class="modal-body py-10 px-lg-17">
+                                             <!--begin::Scroll-->
+                                             <div class="scroll-y me-n7 pe-7 row" id="#">
 
-                              {{-- <div class="modal-body "> --}}
-
-                              {{-- <form action='{{ route('contracts.sync' , $realstate->id) }}' method='post'> --}}
-                              {{-- @csrf --}}
-                              {{-- <div class="row">
                                                   <x:text-input name='client' class="col-md-4" :value='$realstate->Client->name' />
                                                   <x:text-input name='realstate' class="col-md-4" :value='$realstate->Realstate->name' />
                                                   <div class="form-group col-md-4 ">
                                                        <label for="">{{ __('translation.realstatee_unit' ) }}</label>
-                              <select id="realstatee_unit_select" multiple style='width:100%' class='form-control' name='"realstatee_unit_id"'>
-                                   <option>
-                                        {{ __('realstate.chose_unit') }}
-                                   </option>
-                              </select>
-                              @error('realstatee_unit_id')
-                              <span class="text-danger">
-                                   {{$message}}
-                              </span>
-                              @enderror
+                                                       <select id="realstatee_unit_select" multiple style='width:100%' class='form-control' name='realstatee_unit_id[]'>
+                                                            <option>
+                                                                 {{ __('realstate.chose_unit') }}
+                                                            </option>
+                                                       </select>
+                                                       @error('realstatee_unit_id')
+                                                       <span class="text-danger">
+                                                            {{$message}}
+                                                       </span>
+                                                       @enderror
+                                                  </div>
+                                             </div>
+                                             <!--end::Scroll-->
+                                        </div>
+                                        <!--end::Modal body-->
+                                        <!--begin::Modal footer-->
+                                        <div class="modal-footer flex-start items-center">
+                                             <!--begin::Button-->
+                                             <button type="reset" id="kt_modal_add_customer_cancel" data-bs-dismiss="modal" aria-label="Close" class="btn btn-light me-3">{{ __('translation.cancel') }}</button>
+                                             <!--end::Button-->
+                                             <!--begin::Button-->
+                                             <button class="btn btn-primary"> {{ __('translation.save') }} </button>
+                                             <!--end::Button-->
+                                        </div>
+                                        <!--end::Modal footer-->
+                                   </form>
+                                   <!--end::Form-->
+                              </div>
+                              {{-- </form> --}}
                          </div>
 
 
                     </div>
-                    <div class="btn-group">
-                         <button type="reset" class="btn btn-light" data-bs-dismiss="modal">{{ __('translation.cancel') }}</button>
-                         <button type="button" class="btn btn-primary">{{ __('translation.save') }}</button>
-                    </div> --}}
-
-                    <div class="modal-content">
-                         <!--begin::Form-->
-                         <form class="form" action="{{ route('contracts.sync' , $realstate->id) }}" method="post">
-                              @csrf
-                              <!--begin::Modal header-->
-                              <div class="modal-header" id="kt_modal_add_customer_header">
-                                   <!--begin::Modal title-->
-                                   <h2 class="fw-bolder">{{ __('translation.add_area') }}</h2>
-                                   <!--end::Modal title-->
-                                   <!--begin::Close-->
-                                   <div id="kt_modal_add_customer_close" data-bs-dismiss="modal" aria-label="Close" class="btn btn-icon btn-sm btn-active-icon-primary">
-                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-                                        <span class="svg-icon svg-icon-1">
-                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                  <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
-                                                  <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
-                                             </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->
-                                   </div>
-                                   <!--end::Close-->
-                              </div>
-                              <!--end::Modal header-->
-                              <!--begin::Modal body-->
-                              <div class="modal-body py-10 px-lg-17">
-                                   <!--begin::Scroll-->
-                                   <div class="scroll-y me-n7 pe-7 row" id="#">
-
-                                        <x:text-input name='client' class="col-md-4" :value='$realstate->Client->name' />
-                                        <x:text-input name='realstate' class="col-md-4" :value='$realstate->Realstate->name' />
-                                        <div class="form-group col-md-4 ">
-                                             <label for="">{{ __('translation.realstatee_unit' ) }}</label>
-                                             <select id="realstatee_unit_select" multiple style='width:100%' class='form-control' name='realstatee_unit_id[]'>
-                                                  <option>
-                                                       {{ __('realstate.chose_unit') }}
-                                                  </option>
-                                             </select>
-                                             @error('realstatee_unit_id')
-                                             <span class="text-danger">
-                                                  {{$message}}
-                                             </span>
-                                             @enderror
-                                        </div>
-                                   </div>
-                                   <!--end::Scroll-->
-                              </div>
-                              <!--end::Modal body-->
-                              <!--begin::Modal footer-->
-                              <div class="modal-footer flex-start items-center">
-                                   <!--begin::Button-->
-                                   <button type="reset" id="kt_modal_add_customer_cancel" data-bs-dismiss="modal" aria-label="Close" class="btn btn-light me-3">{{ __('translation.cancel') }}</button>
-                                   <!--end::Button-->
-                                   <!--begin::Button-->
-                                   <button class="btn btn-primary"> {{ __('translation.save') }} </button>
-                                   <!--end::Button-->
-                              </div>
-                              <!--end::Modal footer-->
-                         </form>
-                         <!--end::Form-->
-                    </div>
-                    {{-- </form> --}}
                </div>
-
-
           </div>
-     </div>
-</div>
 
-@else
-<div class="" style='display:inline ;margin:3px'>
-     <a href="{{ route('realstate.unit.create' , ['realstate' => $realstate]) }}" class="btn btn-primary btn-sm">
-          {{ __('translation.add_realstate_units') }}
-     </a>
-</div>
-@endif
-</div>
+          @else
+          <div class="" style='display:inline ;margin:3px'>
+               <a href="{{ route('realstate.unit.create' , ['realstate' => $realstate]) }}" class="btn btn-primary btn-sm">
+                    {{ __('translation.add_realstate_units') }}
+               </a>
+          </div>
+          @endif
+     </div>
 </div>
 <div class="table-responsive">
      <table class="table align-middle table-row-dashed fs-6 gy-5" id="">
