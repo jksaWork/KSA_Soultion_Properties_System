@@ -36,13 +36,16 @@ class RealstateController extends RealstateControllerAbstract
             ->editColumn('created_at', function ($area) {
                 return $area->created_at->format('Y-m-d');
             })
-            ->addColumn('province', function ($owner) {
-                return $owner->Province->name ?? '';
+            ->addColumn('province', function ($realstate) {
+                return $realstate->Province->name ?? '';
             })
-            ->addColumn('subarea', function ($owner) {
-                return $owner->SubArea->name ?? ' ';
+            ->addColumn('owner', function ($realstate) {
+                return $realstate->Owner->name ?? '';
             })
-            ->addColumn('opration_precentage', function ($owner) {
+            ->addColumn('subarea', function ($realstate) {
+                return $realstate->SubArea->name ?? ' ';
+            })
+            ->addColumn('opration_precentage', function ($realstate) {
                 return '10%';
             })
             ->addColumn('realstate_units', function ($realstate) {

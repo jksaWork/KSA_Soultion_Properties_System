@@ -19,6 +19,15 @@ class DashboardController extends Controller
         $sum = collect([Realstate::count(), Client::count(), Owner::count()]);
         $data['recored'] = $sum->map(fn ($el) => floor($el / $sum->sum() * 100));
         // dd('Hello', $data['charttwo']);
+        $data['activety']  = [
+            ['text-warnnig', 'تمت اضافه عقار جديد', '3:00'],
+            ['text-success', 'تمت اضافه منطقه جديده', '9:00'],
+            ['text-primary', '   تسديد رسوم عقد', '1:00'],
+            ['text-danger', 'تمت تغير حاله العقار ', '21:00'],
+            ['text-success', 'تمت اضافه عقد  ', '3:00'],
+            ['text-info', 'تمت اضافه مالك ', '3:00'],
+            ['text-light', 'تمت ربط العقد بي وحدات سكنيه ', '3:00'],
+        ];
         return view('admin.dashboard.index', $data);
     }
 

@@ -373,4 +373,6 @@ return [
     'single_subareas' => 'احياء',
     'single_province' => 'محافظات',
     'add' => 'اضافه',
+    'latest_realstate' => 'اخر اضافات العقارات',
+    'activity_history' => 'سجل الانشطه',
 ];
