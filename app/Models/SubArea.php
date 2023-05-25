@@ -18,4 +18,9 @@ class SubArea extends Model
     {
         return $this->belongsTo(Province::class);
     }
+
+    public function Realstates()
+    {
+        return $this->hasMany(Realstate::class, 'owner_id');
+    }
 }

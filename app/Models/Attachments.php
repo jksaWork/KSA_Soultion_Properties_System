@@ -20,7 +20,7 @@ class Attachments extends Model
             case 'App\Models\Owner':
                 return  asset('owner/attachments/' . $key);
             case 'App\Models\Realstate':
-                return  asset('realstates/attachemnts/' . $key);
+                return  asset('realstate/attachments/' . $key);
 
             case 'App\Models\StudentRevenue':
                 return  asset('revenue/attachments/' . $key);

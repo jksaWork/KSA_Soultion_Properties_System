@@ -14,7 +14,7 @@
                          <th class="min-w-125px">{{ __('translation.contract_number') }}</th>
                          {{-- <th class="min-w-125px"> {{ __('translation.client') }} </th> --}}
                          <th class="">{{ __('translation.realstate') }}</th>
-                         <th class="">{{ __('translation.end_date') }}</th>
+                         <th class="min-w-125px">{{ __('translation.end_date') }}</th>
                          <th class="">{{ __('translation.payment_way') }}</th>
                          <th class="">{{ __('translation.amount') }}</th>
                          {{-- <th class="">{{ __('translation.status') }}</th> --}}

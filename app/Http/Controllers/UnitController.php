@@ -50,8 +50,9 @@ class UnitController extends UnitControllerAbstarct
             ->editColumn('created_at', function ($bank) {
                 return $bank->created_at->format('Y-m-d');
             })
-            ->addColumn('realstate_count', function ($bank) {
-                return '<span class="btn btn-sm btn-info">(12)العقارات</span>';
+            ->addColumn('realstate_count', function ($owner) {
+                // return
+                return view('admin.owners.data_table.realstates', compact('owner'));
             })
             ->editColumn('created_at', function ($bank) {
                 return $bank->created_at->format('Y-m-d');

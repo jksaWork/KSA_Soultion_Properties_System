@@ -25,15 +25,20 @@ class AreaController extends Controller
 
     public function AreaData()
     {
+
         $query = Area::query();
-        // dd($query->get());
         return  DataTables::of($query)
             ->addColumn('record_select', 'admin.area.data_table.record_select')
             ->editColumn('created_at', function ($area) {
                 return $area->created_at->format('Y-m-d');
             })
-            ->addColumn('realstate_count', function ($area) {
-                return '<span class="btn btn-sm btn-info">(12)العقارات</span>';
+            ->addColumn('proivnce_count', function ($area) {
+                return view('admin.area.data_table.province', compact('area'));
+            })
+            // province
+
+            ->addColumn('subarea_count', function ($area) {
+                return view('admin.area.data_table.subarea', compact('area'));
             })
             ->editColumn('created_at', function ($area) {
                 return $area->created_at->format('Y-m-d');
@@ -45,7 +50,7 @@ class AreaController extends Controller
             ->addColumn('actions', function ($area) {
                 return view('admin.area.data_table.actions', compact('area'));
             })
-            ->rawColumns(['record_select', 'actions', 'realstate_count',  'status', 'roles', 'service', 'type', 'area'])
+            ->rawColumns(['record_select', 'proivnce_count', 'subarea_count',  'actions', 'realstate_count',  'status', 'roles', 'service', 'type', 'area'])
             ->toJson();
     }
 

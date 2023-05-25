@@ -1,6 +1,6 @@
 {{-- @extends('layouts.admin.admin') --}}
 @extends(auth()->guard('admin')->check() ?'layouts.admin.admin':'layouts.agents.agent_layouts')
-@section('main-head' , __('translation.contracts'))
+@section('main-head' , __('translation.achivement_new'))
 @section('content')
 <div class="post d-flex flex-column-fluid" id="kt_post">
      <!--begin::Container-->
@@ -82,7 +82,7 @@
                                         <th class="">{{ __('translation.realstate_units') }}</th>
 
                                         {{-- <th class="">{{ __('translation.properties') }}</th> --}}
-                                        <th class="text-end min-w-70px">{{ __('translation.action') }}</th>
+                                        <th class="text-end min-w-270px">{{ __('translation.action') }}</th>
                                    </tr>
                                    <!--end::Table row-->
                               </thead>
@@ -179,15 +179,14 @@
                data: 'contracts'
                , name: 'contracts'
                //    , width: '10%'
-          }
-          , {
+          }, {
                data: 'status'
                , name: 'status'
           },
 
           {
-               data: 'actions'
-               , name: 'actions'
+               data: 'achivements_actions'
+               , name: 'achivements_actions'
                , searchable: false
                , sortable: false
                , width: '20%'

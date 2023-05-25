@@ -34,7 +34,7 @@ class ContractController extends Controller
             ->addColumn('realstate', function ($client) {
                 return  $client->Realstate->name ?? '';
             })
-            ->addColumn('realstate_units', function ($contract) {
+            ->addColumn('contracts', function ($contract) {
                 $realstate = $contract;
                 $type = 'contract';
                 return view('realstates.data_table.units', compact('realstate', 'type'));
@@ -50,6 +50,9 @@ class ContractController extends Controller
             // ->addColumn('actions', 'bank.data_table.actions')
             ->addColumn('actions', function ($contract) {
                 return view('admin.contracts.data_table.actions', compact('contract'));
+            })
+            ->addColumn('achivements_actions', function ($contract) {
+                return view('admin.achivements.data_table.achivements_actions', compact('contract'));
             })
             ->editColumn('status', function ($bank) {
                 return $bank->getStatusWithSpan();

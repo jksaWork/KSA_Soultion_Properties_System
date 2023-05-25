@@ -10,4 +10,14 @@ class Area extends Model
 {
     use HasFactory, HasStatus;
     protected $guarded = [];
+
+    public function SubAreas()
+    {
+        return $this->hasMany(SubArea::class);
+    }
+
+    public function Provinces()
+    {
+        return $this->hasMany(Province::class);
+    }
 }

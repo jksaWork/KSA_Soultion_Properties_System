@@ -27,8 +27,8 @@ class ProvinceController extends Controller
             ->editColumn('created_at', function ($area) {
                 return $area->created_at->format('Y-m-d');
             })
-            ->addColumn('realstate_count', function ($area) {
-                return '<span class="btn btn-sm btn-info">(12)العقارات</span>';
+            ->addColumn('realstate_count', function ($owner) {
+                return view('admin.owners.data_table.realstates', compact('owner'));
             })
             ->editColumn('created_at', function ($area) {
                 return $area->created_at->format('Y-m-d');

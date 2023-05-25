@@ -11,13 +11,15 @@ class Select2Input extends Component
      *
      * @return void
      */
-    public $name, $value, $option, $class;
-    public function __construct($name, $class, $value = null, $option = null)
+    public $name, $value, $option, $class, $disabled;
+    public function __construct($name, $class, $value = null, $option = null, $disabled = null)
     {
         $this->name = $name;
         $this->value = $value;
         $this->option = $option;
         $this->class = $class;
+        $this->disabled = $disabled;
+        // dd($disabled);
     }
 
     /**

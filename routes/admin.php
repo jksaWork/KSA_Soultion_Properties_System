@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AchivementController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AreaController as AdminAreaController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -28,6 +29,7 @@ use App\Http\Controllers\RealstateUnitController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SubAreaController;
 use App\Http\Controllers\UnitController;
+use App\Models\Achivement;
 use App\Models\RealstateUnit;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -127,7 +129,10 @@ Route::group(
             Route::get('contract-data-ajax', [ClientCoContractControllerntroller::class, 'Ajax'])->name('contracts.ajax');
             Route::post('contracts-sync/{id}', [ContractController::class, 'syncUnit'])->name('contracts.sync');
             //
-            // Route::
+
+            Route::resource('achivement', AchivementController::class);
+            Route::get('get-contracts', [AchivementController::class, 'Contracts'])->name('achivement.contracts');
+            Route::get('achivements', [AchivementController::class, 'AchivementsData'])->name('achivement.data');
 
 
             Route::resource('realstate', RealstateController::class);

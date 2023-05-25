@@ -11,7 +11,7 @@ class Unit extends Model
     use HasFactory, HasStatus;
     public $fillable = ['name', 'status'];
 
-    public function RealState()
+    public function Realstates()
     {
         return $this->hasMany(Realstate::class);
     }
