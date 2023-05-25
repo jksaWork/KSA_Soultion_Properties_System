@@ -5,15 +5,30 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RealStateUnitRequest;
 use App\Models\Realstate;
 use App\Models\RealstateUnit;
+use App\Traits\HasSelect2Ajax;
 use Illuminate\Http\Request;
 
-class RealstateUnitController extends Controller
+abstract class RealstateUnitControllerAbstarct  extends Controller
 {
+    use HasSelect2Ajax;
+}
+class RealstateUnitController extends RealstateUnitControllerAbstarct
+{
+    public $Model = RealstateUnit::class;
+    public $searchFilable =
+    [
+        'realstate_id' => [
+            'filed' => 'realstate_id',
+            'oprator' => '=',
+        ]
+    ];
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         //
@@ -48,6 +63,7 @@ class RealstateUnitController extends Controller
             RealstateUnit::create($data);
             return redirect()->route('realstate.show', $request->realstate_id);
         } catch (\Throwable $th) {
+            // dd($th);
             return redirect()->back()->withErrors(__('translation.6'));
         }
     }

@@ -117,24 +117,27 @@ Route::group(
 
             // Clients Routes
             Route::resource('clients', ClientController::class);
-            Route::get('owner-data', [ClientController::class, 'ClientData'])->name('clients.data');
-            Route::get('owner-data-ajax', [ClientController::class, 'Ajax'])->name('owners.ajax');
+            Route::get('clients-data', [ClientController::class, 'ClientData'])->name('clients.data');
+            Route::get('clients-data-ajax', [ClientController::class, 'Ajax'])->name('clients.ajax');
             //
 
             // Clients Routes
             Route::resource('contracts', ContractController::class);
-            Route::get('contracts-data', [ContractController::class, 'ContractsData'])->name('clients.data');
+            Route::get('contracts-data', [ContractController::class, 'ContractsData'])->name('contracts.data');
             Route::get('contract-data-ajax', [ClientCoContractControllerntroller::class, 'Ajax'])->name('contracts.ajax');
+            Route::post('contracts-sync/{id}', [ContractController::class, 'syncUnit'])->name('contracts.sync');
             //
             // Route::
 
 
             Route::resource('realstate', RealstateController::class);
             Route::get('realstate-data', [RealstateController::class, 'RealstateData'])->name('realstate.data');
+            Route::get('realstate-data-ajax', [RealstateController::class, 'Ajax'])->name('realstate.ajax');
             // Route::resource('realstate', UserController::class);
 
-            Route::prefix('realstate')->name('realstate.')->group(function () {
+            Route::prefix('realstate-unit')->name('realstate.')->group(function () {
                 Route::resource('unit', RealstateUnitController::class);
+                Route::get('unit-unit-ajax', [RealstateUnitController::class, 'Ajax'])->name('unit.ajax');
             });
 
             Route::resource('users', UserController::class);

@@ -5,11 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RealstateRequest;
 use App\Models\Attachments;
 use App\Models\Realstate;
+use App\Traits\HasSelect2Ajax;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class RealstateController extends Controller
+abstract class RealstateControllerAbstract extends Controller
 {
+
+    use HasSelect2Ajax;
+}
+class RealstateController extends RealstateControllerAbstract
+{
+    public $Model = Realstate::class;
     /**
      * Display a listing of the resource.
      *

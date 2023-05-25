@@ -13,7 +13,6 @@ trait HasSelect2Ajax
 
     public  function Ajax()
     {
-
         $search = request()->search;
         $RequestArray = request()->toArray();
 

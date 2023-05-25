@@ -11,11 +11,12 @@ class showUnit extends Component
      *
      * @return void
      */
-    public $RealstateUnits, $realstate;
-    public function __construct($realstateunits, $realstate)
+    public $RealstateUnits, $realstate, $type;
+    public function __construct($realstateunits, $realstate, $type = null)
     {
         $this->realstate = $realstate;
         $this->RealstateUnits = $realstateunits;
+        $this->type = $type;
     }
 
     /**

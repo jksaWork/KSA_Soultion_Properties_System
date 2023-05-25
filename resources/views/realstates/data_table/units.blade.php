@@ -1,5 +1,5 @@
 <div>
-     <a class="btn btn-sm btn-primary" href='#' data-bs-toggle="modal" data-bs-target="#kt_modal_{{ $realstate->id }}">
+     <a class="btn btn-sm btn-primary fs-10px" href='#' data-bs-toggle="modal" data-bs-target="#kt_modal_{{ $realstate->id }}">
           {{ __('translation.realstate_units') }} ({{ count($realstate->RealStateUnits) }})
      </a>
 
@@ -16,8 +16,7 @@
                     </div>
 
                     <div class="modal-body">
-                         <x:show-unit :realstateunits='$realstate->RealstateUnits' realstate='$realstate->id' />
-
+                         <x:show-unit :realstateunits='$realstate->RealstateUnits' :realstate='$realstate->id' />
                          {{-- <p>Modal body text goes here.</p> --}}
                     </div>
 

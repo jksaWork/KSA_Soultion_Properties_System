@@ -30,7 +30,7 @@ class AttachmentsController extends Controller
             // Get Attachable From And Route And Key From Function getAttachableModel
             [$attachmentableClass, $route, $routeKey] = $attachmentableArray;
             $attachmentable = $attachmentableClass::find($request->attachmentable);
-            // dd($attachmentableArray);
+            // dd($attachmentableArray, $request->type);
             foreach ($request->attachments  as $key => $file) {
                 $file_name =  $file->hashName();
                 $file->store($routeKey . '/attachments',  'public');

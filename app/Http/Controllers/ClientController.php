@@ -5,11 +5,19 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ClientRequest;
 use App\Models\Client;
 use App\Repo\Interfaces\ClientInteface;
+use App\Traits\HasSelect2Ajax;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class ClientController extends Controller
+// abstract class
+abstract class ClientControllerAbstract extends Controller
 {
+
+    use HasSelect2Ajax;
+}
+class ClientController extends ClientControllerAbstract
+{
+    public $Model = Client::class;
     public $interface; # the InterFace Used In This Controller
 
     public function __construct(ClientInteface $interface)

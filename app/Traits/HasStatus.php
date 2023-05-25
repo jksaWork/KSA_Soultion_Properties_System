@@ -1,16 +1,20 @@
 <?php
 
 namespace App\Traits;
-trait HasStatus {
+
+trait HasStatus
+{
     protected $statusattrubute = 'status';
     protected $status_filed = 'active';
-    public function ChangeStatus(){
-        $this->{$this->statusattrubute} =!$this->status;
+    public function ChangeStatus()
+    {
+        $this->{$this->statusattrubute} = !$this->status;
         $this->save();
     }
 
-    public function getStatusWithSpan(){
-        if(!$this->{$this->statusattrubute}) return "<span class='badge badge-light-warning'> " .  __('translation.in' . $this->status_filed)  . " </span>";
+    public function getStatusWithSpan()
+    {
+        if (!$this->{$this->statusattrubute}) return "<span class='badge badge-light-danger'> " .  __('translation.in' . $this->status_filed)  . " </span>";
         else  return "<span class='badge badge-light-success'> " .  __('translation.' . $this->status_filed)  . "</span>";
     }
 }

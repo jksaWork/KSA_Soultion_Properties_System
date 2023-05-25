@@ -304,7 +304,7 @@
 
                               {{-- @dd($realstate->RealstateUnits) --}}
                               <div class="tab-pane fade" id="kt_tab_pane_10" role="tabpanel">
-                                   <x:show-unit :realstateunits='$realstate->RealstateUnits' realstate='$realstate->id' />
+                                   <x:show-unit :realstateunits='$realstate->RealstateUnits' :realstate='$realstate->id' />
                               </div>
 
                               <div class="tab-pane fade" id="kt_tab_pane_11" role="tabpanel">

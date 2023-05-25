@@ -28,6 +28,8 @@ class Attachments extends Model
             case 'App\Models\Client':
                 return  asset('client/attachments/' . $key);
 
+            case 'App\Models\Contract':
+                return  asset('contract/attachments/' . $key);
                 break;
             default:
                 return asset('agents/attachments/' . $key);;
@@ -64,6 +66,9 @@ class Attachments extends Model
 
             case 'client':
                 return [Client::class, 'clients.show', 'client'];
+
+            case 'contract':
+                return [Contract::class, 'contracts.show', 'contract'];
 
             default:
                 return [Owner::class, 'owners.show', 'owner'];

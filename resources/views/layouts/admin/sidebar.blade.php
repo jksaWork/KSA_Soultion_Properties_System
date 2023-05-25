@@ -153,7 +153,7 @@
                                    </span>
                                    <!--end::Svg Icon-->
                               </span>
-                              <span class="menu-title">{{ __('translation.client_mangement') }} </span>
+                              <span class="menu-title">{{ __('translation.contract_mangement') }} </span>
                               <span class="menu-arrow"></span>
                          </span>
                          <div class="menu-sub menu-sub-accordion menu-active-bg">
@@ -166,7 +166,7 @@
                                    </a>
                               </div>
                               <div class="menu-item">
-                                   <a class="menu-link" href="{{ route('clients.create') }}">
+                                   <a class="menu-link" href="{{ route('contracts.create') }}">
                                         <span class="menu-bullet">
                                              <span class="bullet bullet-dot"></span>
                                         </span>
