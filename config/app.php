@@ -176,8 +176,6 @@ return [
         App\Providers\RepositroyPatternProvider::class,
 
         Yajra\DataTables\DataTablesServiceProvider::class,
-        Mckenziearts\Notify\LaravelNotifyServiceProvider::class,
-
     ],
 
     /*
