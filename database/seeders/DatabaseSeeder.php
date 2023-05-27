@@ -81,7 +81,7 @@ class DatabaseSeeder extends Seeder
                 ServiceSeeder::class,
                 AgentSeeder::class,
                 AreaSedder::class,
-                RelastateSeed::class
+                // RelastateSeed::class
             ]
         );
     }
