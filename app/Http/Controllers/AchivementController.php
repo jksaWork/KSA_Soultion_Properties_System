@@ -68,7 +68,8 @@ class AchivementController extends Controller
             // 'realstate_unit_id' => $contract->rea
         ];
         $achivements = Achivement::create($data);
-        Attachments::AttachMUltiFIleFiles($request->attachments, $achivements, 'clients/attachment');
+        if ($request->attachments)
+            Attachments::AttachMUltiFIleFiles($request->attachments, $achivements, 'clients/attachment');
 
         return  redirect()->route('achivement.index');
     }

@@ -89,7 +89,8 @@ class RealstateController extends RealstateControllerAbstract
         try {
             $data =  $request->except('attachments', '_token');
             $realstate =   Realstate::create($data);
-            Attachments::AttachMUltiFIleFiles($request->attachments, $realstate, 'realstate/attachemnts');
+            if ($request->attachments)
+                Attachments::AttachMUltiFIleFiles($request->attachments, $realstate, 'realstate/attachemnts');
             session()->flash('success',  __('translation.1'));
             return redirect()->route('realstate.index');
         } catch (\Throwable $th) {

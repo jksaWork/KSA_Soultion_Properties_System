@@ -1,6 +1,6 @@
 {{-- @extends('layouts.admin.admin') --}}
 @extends(auth()->guard('admin')->check() ?'layouts.admin.admin':'layouts.agents.agent_layouts')
-@section('main-head' , __('translation.owners_dashboard'))
+@section('main-head' , __('translation.cleint_mangemnts'))
 @section('content')
 <div class="post d-flex flex-column-fluid" id="kt_post">
      <!--begin::Container-->
@@ -41,7 +41,7 @@
 
                               <!--end::Export-->
                               <!--begin::Add customer-->
-                              <a href='{{ route('owners.create')}}' class="btn btn-primary">{{ __('translation.add_owners') }}</a>
+                              <a href='{{ route("clients.create")}}' class="btn btn-primary">{{ __('translation.add_client') }}</a>
                               <!--end::Add customer-->
                          </div>
                          <!--end::Toolbar-->

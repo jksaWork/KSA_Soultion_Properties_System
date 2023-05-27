@@ -27,7 +27,8 @@ class  OwnerRepository implements OwnerInterFace
             DB::beginTransaction();
             $owner = $this->StoreOwnerInDatabse($request);
             // Attach  Owners Files
-            Attachments::AttachMUltiFIleFiles($request->attachments, $owner, 'public');
+            if ($request->attachments)
+                Attachments::AttachMUltiFIleFiles($request->attachments, $owner, 'public');
             // dd('Hello');
             DB::commit();
 

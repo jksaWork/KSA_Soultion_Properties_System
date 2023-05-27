@@ -84,7 +84,8 @@ class ContractController extends Controller
 
             $data =  $request->except('_token', 'attachments');
             $contract  = Contract::create($data);
-            Attachments::AttachMUltiFIleFiles($request->attachments, $contract, 'contract/attachments');
+            if ($request->attachments)
+                Attachments::AttachMUltiFIleFiles($request->attachments, $contract, 'contract/attachments');
             session()->flash('success',  __('translation.1'));
             return redirect()->route('contracts.index');
         } catch (\Throwable $th) {

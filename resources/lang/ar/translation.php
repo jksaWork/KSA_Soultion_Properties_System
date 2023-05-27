@@ -375,4 +375,5 @@ return [
     'add' => 'اضافه',
     'latest_realstate' => 'اخر اضافات العقارات',
     'activity_history' => 'سجل الانشطه',
+    'cleint_mangemnts' => 'اداره المستاجرين',
 ];

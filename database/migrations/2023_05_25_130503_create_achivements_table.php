@@ -27,7 +27,7 @@ class CreateAchivementsTable extends Migration
             $table->decimal('amount', 8, 2);
             $table->enum('type', Achivement::TYPES)->default('pay');
             $table->date('payment_date');
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }
