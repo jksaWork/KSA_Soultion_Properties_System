@@ -12,7 +12,7 @@ class tinymceEditor extends Component
      * @return void
      */
     public $value;
-    public function __construct($value = null)
+    public function __construct($value = '')
     {
         $this->value = $value;
     }
