@@ -1,6 +1,6 @@
 <div>
      <a class="btn btn-sm btn-primary" href='#' data-bs-toggle="modal" data-bs-target="#kt_modal_{{ $owner->id }}">
-          {{ __('translation.subareas') }} ({{ count($owner->Realstates) }})
+          {{ __('translation.realstates') }} ({{ count($owner->Realstates) }})
      </a>
 
      <div class="modal fade " tabindex="-1" id="kt_modal_{{ $owner->id }}">

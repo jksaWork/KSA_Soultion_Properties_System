@@ -177,23 +177,61 @@
                , sortable: false
                , width: '20%'
           }
-     , ];
-     // var OfferColums = isadmin ? OfferColums : OfferColums.filter(el => el.data !== 'agent');
+     ];
      let rolesTable = $('#owners-table').DataTable({
-                    dom: "tiplr"
-                    , serverSide: true
-                    , processing: true
-                    , "language": {
-                         "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
-                    }
-                    , ajax: {
-                         url: '{{ route("owners.data")}}'
-
-                    }
+          dom: "tiplr"
+          , serverSide: true
+          , processing: true
+          , "language": {
+               "url": "{{ asset('admin_assets/datatable-lang/' . app()->getLocale() . '.json') }}"
+          }
+          , ajax: {
+               url: '{{ route("owners.data")}}'
+          }
+          , columns: [{
+                    data: 'record_select'
+                    , name: 'record_select'
+                    , searchable: false
+                    , sortable: false
+                    , width: '1%'
+               },
+               // {data: 'logo', name: 'logo' },
+               {
+                    data: 'name'
+                    , name: 'name'
                }
-               '
-          , }
-          , columns: OfferColums
+               , {
+                    data: 'id_number'
+                    , name: 'id_number'
+               },
+
+               {
+                    data: 'phone'
+                    , name: 'phone'
+               },
+
+               {
+                    data: 'email'
+                    , name: 'email'
+               },
+
+               {
+                    data: 'status'
+                    , name: 'status'
+               }
+               , {
+                    data: 'properties'
+                    , name: 'properties'
+               },
+
+               {
+                    data: 'actions'
+                    , name: 'actions'
+                    , searchable: false
+                    , sortable: false
+                    , width: '20%'
+               }
+          ]
           , order: [
                [3, 'desc']
           ]
